@@ -2,7 +2,6 @@ import readfile as rf                                   # Import readfile module
 import restaurants as rs                                # Import restaurants module
 
 def main():                                             # Main workflow
-    sheet = rf.Sheet()
-    print(sheet.query(kw = ['*'], strict = True , column = ['Ok']))
+    pass
 
 if __name__ == '__main__': main()

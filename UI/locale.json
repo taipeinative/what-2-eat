@@ -1,0 +1,42 @@
+[
+    {
+        "id": "title",
+        "en": "What 2 Eat",
+        "zh": "吃什麼"
+    },
+    {
+        "id": "meta-author",
+        "en": "@taipeinative on GitHub",
+        "zh": "GitHub用戶 @taipeinative"
+    },
+    {
+        "id": "meta-description",
+        "en": "Help you decide what to eat!",
+        "zh": "幫你決定吃什麼！"
+    },
+    {
+        "id": "page-main-navbar-title",
+        "en": "What 2 Eat",
+        "zh": "吃什麼"
+    },
+    {
+        "id": "page-main-navbar-language",
+        "en": "中",
+        "zh": "EN"
+    },
+    {
+        "id": "page-main-start-subhedding",
+        "en": "Help you decide what&nbsp;to eat.",
+        "zh": "幫你決定吃什麼。"
+    },
+    {
+        "id": "page-main-start-info",
+        "en": "Save time, save your stomach.",
+        "zh": "省時又省力。"
+    },
+    {
+        "id": "page-main-start-explore",
+        "en": "Explore ❯",
+        "zh": "探索 ❯"
+    }
+]
