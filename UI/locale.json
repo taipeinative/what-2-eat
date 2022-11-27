@@ -1,42 +1,62 @@
 [
     {
         "id": "title",
+        "attr": "innerHTML",
         "en": "What 2 Eat",
-        "zh": "吃什麼"
+        "zh": "呷蝦米"
     },
     {
         "id": "meta-author",
+        "attr": "innerHTML",
         "en": "@taipeinative on GitHub",
         "zh": "GitHub用戶 @taipeinative"
     },
     {
         "id": "meta-description",
+        "attr": "innerHTML",
         "en": "Help you decide what to eat!",
         "zh": "幫你決定吃什麼！"
     },
     {
         "id": "page-main-navbar-title",
+        "attr": "innerHTML",
         "en": "What 2 Eat",
-        "zh": "吃什麼"
+        "zh": "呷蝦米"
+    },
+    {
+        "id": "page-main-navbar-mode",
+        "attr": "title",
+        "en": "Switch light/dark mode",
+        "zh": "切換淺色／深色模式"
     },
     {
         "id": "page-main-navbar-language",
+        "attr": "innerHTML",
         "en": "中",
         "zh": "EN"
     },
     {
+        "id": "page-main-navbar-language",
+        "attr": "title",
+        "en": "Switch to Chinese ／ 中文",
+        "zh": "切換中文 ／ English"
+    },
+    {
         "id": "page-main-start-subhedding",
+        "attr": "innerHTML",
         "en": "Help you decide what&nbsp;to eat.",
         "zh": "幫你決定吃什麼。"
     },
     {
         "id": "page-main-start-info",
+        "attr": "innerHTML",
         "en": "Save time, save your stomach.",
         "zh": "省時又省力。"
     },
     {
         "id": "page-main-start-explore",
+        "attr": "innerHTML",
         "en": "Explore ❯",
-        "zh": "探索 ❯"
+        "zh": "了解更多 ❯"
     }
 ]
