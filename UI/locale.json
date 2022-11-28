@@ -58,5 +58,17 @@
         "attr": "innerHTML",
         "en": "Explore ❯",
         "zh": "了解更多 ❯"
+    },
+    {
+        "id": "page-main-footer-author",
+        "attr": "title",
+        "en": "See GitHub profile",
+        "zh": "GitHub檔案"
+    },
+    {
+        "id": "page-main-footer-repo",
+        "attr": "title",
+        "en": "See GitHub repository",
+        "zh": "GitHub存儲庫"
     }
 ]

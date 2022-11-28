@@ -15,18 +15,18 @@
 
     <!-- Link -->
     <link id = "link-css-style" rel = "stylesheet" href = "style.css" />
-    <link id = "link-icon" rel = "icon" href = "favicon.ico" />
+    <link id = "link-icon" rel = "icon" href = "src/favicon.ico" />
 
     <!-- Script -->
     <script id = "script-eel" type = "text/javascript" src = "/eel.js"></script>
-    <script id = "script-pass" type = "text/javascript" src = "api.js"></script>
-    <script id = "script-pass" type = "text/javascript" src = "locale.js"></script>
-    <script id = "script-pass" type = "text/javascript" src = "misc.js"></script>
+    <script id = "script-api" type = "text/javascript" src = "api.js"></script>
+    <script id = "script-locale" type = "text/javascript" src = "locale.js"></script>
+    <script id = "script-main" type = "text/javascript" src = "main.js"></script>
 
 </head>
 <body>
 
-    <div id = "page-main">
+    <div id = "page-main" class = "-container">
 
         <div id = "page-main-navbar" class = "navbar">
 
@@ -79,12 +79,23 @@
 
         </div>
 
+        <!-- Setting Page -->
+        <a id = "page-main-setting" onclick="move(-1)" class = "setting hold">
+            Back
+        </a>
+
         <!-- Footer -->
         <div id = "page-main-footer" class = "footer">
 
-            <a id = "page-main-footer-author" href = "https://github.com/taipeinative" class = "footer-author plain">
+            <a id = "page-main-footer-author" href = "https://github.com/taipeinative" title = "See GitHub profile" class = "footer-author plain">
 
-                By @taipeinative
+                taipeinative
+
+            </a>
+
+            <a id = "page-main-footer-repo" href = "https://github.com/taipeinative/what-2-eat" title = "See GitHub repository" class = "footer-repo plain">
+
+                what-2-eat
 
             </a>
 

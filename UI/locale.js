@@ -3,42 +3,6 @@ var language = 'en';
 
 
 // Functions
-
-/**
- * Intercept users' click event to trigger localeUpdate function; if the parameter is `'Fail'`, hide the language button.
- * @param {boolean} [fail] - Whether enable translation function; default to be enable.
- */
-function clickLanguage(fail) {
-
-  var button = document.getElementById('page-main-navbar-language');
-
-  switch (fail) {
-
-    case 'Fail':                                                    // Case when requesting locale failed:
-
-      button.classList.add('none');                                 // Add 'none' class to language button (make it hidden)
-      break;
-
-    default:                                                        // Case when requesting locale success:
-
-      button.addEventListener("click", function (e) {               // Add an event listener to language button
-  
-        if (button) {                                               // When button is clicked, do:
-      
-          ( (language == 'en') ? (language = 'zh') : (language = 'en'));  // Toggle language between Chinese and English
-          localeUpdate();                                           // Update the page
-      
-        }
-      
-        e.preventDefault();                                         // Prevent default behavior (because we don't want <a> element actually triggered)
-      
-      }, false);
-
-      break;
-
-  }
-  
-}
   
 /**
  * Parse JSON data and translate the page.

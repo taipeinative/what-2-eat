@@ -15,8 +15,8 @@
     --dot1-night: #A36;                                                         /* Dot1 color (Night) */
     --dot2-day: #AAE;                                                           /* Dot2 color (Day) */
     --dot2-night: #22B;                                                         /* Dot2 color (Night) */
-    --dot3-day: #6CA;                                                           /* Dot2 color (Day) */
-    --dot3-night: #286;                                                         /* Dot2 color (Night) */
+    --dot3-day: #6CA;                                                           /* Dot3 color (Day) */
+    --dot3-night: #286;                                                         /* Dot3 color (Night) */
     --nav-day: #FFF;                                                            /* Navbar color (Day) */
     --text-day: #222;                                                           /* Text color (Day) */
     --text-night: #EEE;                                                         /* Text color (Night) */
@@ -63,7 +63,6 @@ html.night {
     position: absolute;
 
 }
-
 
 .dot:nth-child(1) {
 
@@ -176,17 +175,63 @@ html.night {
 .footer {
 
     display: flex;
-    justify-content: center;
+    bottom: 2vh;
+    left: 0;
+    position: fixed;
+    transition-property: opacity;
+    -webkit-transition-property: opacity;
+    transition-duration: .5s;
+    -webkit-transition-duration: .5s;
+    width: 100%;
+
+}
+
+.footer :not(:last-child)::after {
+
+    content: '．';
 
 }
 
 
 .footer-author {
 
-    bottom: 2vh;
+    display: flex;
+    flex: 1;
     font-size: 0.8em;
     font-weight: 400;
-    position: absolute;
+    justify-content: flex-end;
+    padding: 0;
+    text-align: center;
+
+}
+
+.footer-author::before {
+
+    height: 1em;
+    margin-right: .5em;
+    width: 1em;
+
+}
+
+.day .footer-author::before {
+
+    content: url('src/GitHub-day.svg');
+
+}
+
+.night .footer-author::before {
+
+    content: url('src/GitHub-night.svg');
+
+}
+
+.footer-repo {
+
+    display: flex;
+    flex: 1;
+    font-size: 0.8em;
+    font-weight: 400;
+    justify-content: flex-start;
     padding: 0;
     text-align: center;
     transition-property: opacity;
@@ -355,5 +400,13 @@ a.plain:hover {
     background: none;
     border: none;
     color: inherit;
+
+}
+
+.hold.setting {
+
+    display: none;
+    transition: none;
+    -webkit-transition: none;
 
 }
