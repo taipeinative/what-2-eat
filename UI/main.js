@@ -42,28 +42,34 @@ var currentIndex = 0;
 }
 
 /**
- * Intercept users' click event to trigger change light / dark mode function.
+ * Intercept users' click event to trigger change light / dark theme function.
+ * @param {'set'} [init] - Whether initialize the light / dark theme.
  */
-function clickMode() {
+function clickTheme(init) {
 
     var button = document.getElementById('page-main-navbar-mode');
     var html = document.getElementById("html");
-    button.setAttribute('onclick','document.getElementById("html").classList.toggle("day");');
+
+    if (init == 'set') {
+
+      const currentTime = new Date().getHours();
+
+      if ((currentTime < 7) || (currentTime > 17)) {
+
+        html.classList.toggle("night");
+
+      } else {
+
+        html.classList.toggle("day");
+
+      }
+
+    }
   
     button.addEventListener("click", function (e) {                         // Add an event listener to mode button; when button is clicked, do:
   
-        if (html.classList.contains("day")) {                               // Toggle classes: if day, change into night;
-
-            html.classList.remove("night");
-            html.classList.add("day");
-
-        } else {                                                            // ...if night, change into day.
-
-            html.classList.remove("day");
-            html.classList.add("night");
-
-        }
-  
+      html.classList.toggle("night");
+      html.classList.toggle("day");
       e.preventDefault();                                                   // Prevent default behavior (because we don't want <a> element actually triggered)
   
     }, false);
@@ -117,9 +123,16 @@ async function move(steps = 1, mode = 'relative') {
         for (i = currentIndex ; i < ( currentIndex + count ) ; i++) {
 
           document.getElementById(pageIdList[i]).classList.add('fin');
-          if (i == 0) {document.getElementById('page-main-footer').classList.add('transparent');}
-          await delay(1200);
+          if (i == 0) {document.getElementById('page-main-footer').classList.add('fin');} // Make current page shifts up
+
+          await delay(600);
+
           document.getElementById(pageIdList[i]).classList.add('none');
+          if (i == 0) {document.getElementById('page-main-footer').classList.add('none');} // Clear the space up
+          document.getElementById(pageIdList[i+1]).classList.remove('none'); 
+
+          await delay(50);
+
           document.getElementById(pageIdList[i+1]).classList.remove('hold');
 
         }
@@ -131,14 +144,21 @@ async function move(steps = 1, mode = 'relative') {
         for (i = currentIndex ; i > ( currentIndex + count ) ; i--) {
 
           document.getElementById(pageIdList[i]).classList.add('hold');
-          if (i == 1) {document.getElementById('page-main-footer').classList.remove('transparent');}
+          await delay(600);
+          document.getElementById(pageIdList[i]).classList.add('none');
+          if (i == 1) {document.getElementById('page-main-footer').classList.remove('none');}
           document.getElementById(pageIdList[i-1]).classList.remove('none');
-          await delay(1200);
+          await delay(50);
+          if (i == 1) {document.getElementById('page-main-footer').classList.remove('fin');}
           document.getElementById(pageIdList[i-1]).classList.remove('fin');
 
         }
 
         currentIndex = currentIndex + count;
+
+      } else if (count == 0) {
+
+        return;
 
       } else {
 

@@ -1,9 +1,15 @@
 [
     {
+        "id": "html",
+        "attr": "lang",
+        "en": "en",
+        "zh": "zh"
+    },
+    {
         "id": "title",
         "attr": "innerHTML",
         "en": "What 2 Eat",
-        "zh": "呷蝦米"
+        "zh": "吃什麼"
     },
     {
         "id": "meta-author",
@@ -21,13 +27,13 @@
         "id": "page-main-navbar-title",
         "attr": "innerHTML",
         "en": "What 2 Eat",
-        "zh": "呷蝦米"
+        "zh": "吃什麼"
     },
     {
         "id": "page-main-navbar-mode",
         "attr": "title",
-        "en": "Switch light/dark mode",
-        "zh": "切換淺色／深色模式"
+        "en": "Switch light/dark theme",
+        "zh": "切換淺色／深色主題"
     },
     {
         "id": "page-main-navbar-language",
@@ -39,7 +45,7 @@
         "id": "page-main-navbar-language",
         "attr": "title",
         "en": "Switch to Chinese ／ 中文",
-        "zh": "切換中文 ／ English"
+        "zh": "切換英文 ／ English"
     },
     {
         "id": "page-main-start-subhedding",
@@ -58,6 +64,72 @@
         "attr": "innerHTML",
         "en": "Explore ❯",
         "zh": "了解更多 ❯"
+    },
+    {
+        "id": "page-main-start-explore",
+        "attr": "title",
+        "en": "Go to next step",
+        "zh": "下一步"
+    },
+    {
+        "id": "page-main-setting-caption",
+        "attr": "innerHTML",
+        "en": "Customize the query.",
+        "zh": "選擇模式："
+    },
+    {
+        "id": "page-main-setting-subheading",
+        "attr": "innerHTML",
+        "en": "Do it fast, or take it slow.",
+        "zh": "隨機挑選，或是仔細篩選。"
+    },
+    {
+        "id": "page-main-setting-option-random",
+        "attr": "title",
+        "en": "Random",
+        "zh": "隨機"
+    },
+    {
+        "id": "option-random-hedding",
+        "attr": "innerHTML",
+        "en": "Random",
+        "zh": "隨機"
+    },
+    {
+        "id": "option-random-info",
+        "attr": "innerHTML",
+        "en": "Pick a restaurant right&nbsp;away. No time to&nbsp;waste!",
+        "zh": "隨機挑選一間餐廳。"
+    },
+    {
+        "id": "page-main-setting-option-classic",
+        "attr": "title",
+        "en": "Classic",
+        "zh": "經典"
+    },
+    {
+        "id": "option-classic-hedding",
+        "attr": "innerHTML",
+        "en": "Classic",
+        "zh": "經典"
+    },
+    {
+        "id": "option-classic-info",
+        "attr": "innerHTML",
+        "en": "Filter restaurants based&nbsp;on your answers.",
+        "zh": "根據您的回答篩選餐廳。"
+    },
+    {
+        "id": "page-main-setting-back",
+        "attr": "title",
+        "en": "Go back to last step",
+        "zh": "上一步"
+    },
+    {
+        "id": "page-main-setting-back",
+        "attr": "innerHTML",
+        "en": "❮ Back",
+        "zh": "❮ 返回"
     },
     {
         "id": "page-main-footer-author",

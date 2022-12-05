@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id = "html" dir = "ltr" lang = "en" class = "night">
+<html id = "html" dir = "ltr" lang = "en" class = "">
 
 <head>
 
@@ -30,13 +30,13 @@
 
         <div id = "page-main-navbar" class = "navbar">
 
-            <h1 id = "page-main-navbar-title" class = "nav-title">
+            <h1 id = "page-main-navbar-title" class = "nav-title" onclick = "move(0, 'absolute');">
 
                 What 2 Eat
 
             </h1>
 
-            <a id = "page-main-navbar-mode"  href = "#" title = "Switch light/dark mode" class = "nav-mode">
+            <a id = "page-main-navbar-mode"  href = "#" title = "Switch light/dark theme" class = "nav-mode">
 
                 ◐
 
@@ -69,7 +69,7 @@
                     Save time, save your stomach. 
 
                 </p>
-                <a id = "page-main-start-explore" href = "#" class = "start-explore">
+                <a id = "page-main-start-explore" href = "#" title = "Go to next step" class = "start-explore">
     
                     Explore ❯
     
@@ -80,9 +80,63 @@
         </div>
 
         <!-- Setting Page -->
-        <a id = "page-main-setting" onclick="move(-1)" class = "setting hold">
-            Back
-        </a>
+        <div id = "page-main-setting" class = "setting hold none">
+
+            <div id = "page-main-setting-container" class = "setting-container">
+
+                <h3 id = "page-main-setting-caption" class = "setting-title">
+
+                    Customize the query.
+
+                </h3>
+                <p id = "page-main-setting-subheading" class = "setting-info">
+
+                    Do it fast, or take it slow.
+
+                </p>
+                <div id = "page-main-setting-option-container" class = "option-container">
+
+                    <div id = "page-main-setting-option-random" title = "Random" class = "option" tabindex = "0">
+
+                        <h4 id = "option-random-hedding" class = "option-heading icon-random">
+
+                            Random
+                            
+                        </h4>
+
+                        <p id = "option-random-info" class = "option-info">
+
+                            Pick a restaurant right&nbsp;away. No time to&nbsp;waste!
+
+                        </p>
+
+                    </div>
+                    <div id = "page-main-setting-option-classic" title = "Classic" class = "option" tabindex = "0">
+
+                        <h4 id = "option-classic-hedding" class = "option-heading icon-classic">
+
+                            Classic
+                            
+                        </h4>
+
+                        <p id = "option-classic-info" class = "option-info">
+
+                            Filter restaurants based&nbsp;on your answers.
+
+                        </p>
+
+                    </div>
+
+                </div>
+                <a id = "page-main-setting-back" href = "#" title = "Go back to last step" class = "back" onclick = "move(-1);">
+
+                    ❮ Back
+
+                </a>
+
+            </div>
+
+        </div>
 
         <!-- Footer -->
         <div id = "page-main-footer" class = "footer">

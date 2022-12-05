@@ -57,7 +57,7 @@ window.onload = function () {                                           // Fires
   }
 
   clickExplore();                                                       // Add an event listener to explore button
-  clickMode();                                                          // Add an event listener to mode button
+  clickTheme('set');                                                    // Add an event listener to theme button
   setPageNodes();
 
 };

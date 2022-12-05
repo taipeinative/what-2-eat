@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="13.76676mm"
+   height="15.875mm"
+   viewBox="0 0 13.76676 15.875"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="Classic-night.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="6.7277217"
+     inkscape:cx="-5.0537168"
+     inkscape:cy="34.186908"
+     inkscape:window-width="1920"
+     inkscape:window-height="1046"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="圖層 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-164.90638,-133.59287)">
+    <path
+       id="rect453-9-7-3"
+       style="fill:#eeeeee;fill-opacity:1;stroke:none;stroke-width:1.94194;stroke-linecap:round"
+       d="m 169.70024,134.7515 a 4.9467792,4.9467792 0 0 0 -3.31316,1.44562 4.9467792,4.9467792 0 0 0 0,6.99558 4.9467792,4.9467792 0 0 0 5.90071,0.8231 l 4.05557,4.05559 c 0.53145,0.53146 1.38709,0.53142 1.91854,-1e-5 0.53145,-0.53145 0.53145,-1.38708 0,-1.91852 l -4.05392,-4.0539 a 4.9467792,4.9467792 0 0 0 -0.82476,-5.90184 4.9467792,4.9467792 0 0 0 -3.68298,-1.44562 z m 0.052,1.38623 a 3.5592455,3.5592455 0 0 1 2.64974,1.0405 3.5592455,3.5592455 0 0 1 0,5.03334 3.5592455,3.5592455 0 0 1 -5.03389,0 3.5592455,3.5592455 0 0 1 0,-5.03334 3.5592455,3.5592455 0 0 1 2.38415,-1.0405 z" />
+  </g>
+</svg>

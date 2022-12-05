@@ -3,30 +3,49 @@
 :root {
 
     /* Fonts */
-    --font-en: 'Open Sans', 'Corbel', 'Dubai', 'Arial', sans-serif;              /* Default English Typefaces */
-    --font-zh: 'Noto Sans TC' , 'PingFang' , 'Microsoft JhengHei', sans-serif;   /* Default Chinese Typefaces */
+    --font-en: 'Open Sans', 'Corbel', 'Dubai', 'Arial', sans-serif;             /* Default English Typefaces */
+    --font-zh: 'Noto Sans TC' , 'PingFang' , 'Microsoft JhengHei', sans-serif;  /* Default Chinese Typefaces */
 
     /* Colors */
-    --bg-day: #FFF;                                                             /* Background color (Day) */
-    --bg-night: #333;                                                           /* Background color (Night) */
-    --mode-to-night: #222;                                                      /* Mode changer color (Day to Night) */
-    --mode-to-day: #CA1;                                                        /* Mode changer color (Night to Day) */
-    --dot1-day: #D8B;                                                           /* Dot1 color (Day) */
-    --dot1-night: #A36;                                                         /* Dot1 color (Night) */
-    --dot2-day: #AAE;                                                           /* Dot2 color (Day) */
-    --dot2-night: #22B;                                                         /* Dot2 color (Night) */
-    --dot3-day: #6CA;                                                           /* Dot3 color (Day) */
-    --dot3-night: #286;                                                         /* Dot3 color (Night) */
-    --nav-day: #FFF;                                                            /* Navbar color (Day) */
-    --text-day: #222;                                                           /* Text color (Day) */
-    --text-night: #EEE;                                                         /* Text color (Night) */
+    --bg-day: #FFF;                                                            /* Background color (Day) */
+    --bg-night: #333;                                                          /* Background color (Night) */
+    --mode-to-night: #222;                                                     /* Mode changer color (Day to Night) */
+    --mode-to-day: #CA1;                                                       /* Mode changer color (Night to Day) */
+    --pink-day: #D8B;                                                          /* Pink color (Day) */
+    --pink-night: #A36;                                                        /* Pink color (Night) */
+    --blue-day: #AAE;                                                          /* Blue color (Day) */
+    --blue-night: #22B;                                                        /* Blue color (Night) */
+    --green-day: #6CA;                                                         /* Green color (Day) */
+    --green-night: #286;                                                       /* Green color (Night) */
+    --nav-day: #FFF;                                                           /* Navbar color (Day) */
+    --text-day: #222;                                                          /* Text color (Day) */
+    --text-night: #EEE;                                                        /* Text color (Night) */
+
+    /* Gradients */
+    --highlight-day: linear-gradient(90deg, #FC5 0%, #D90 100%);
+    --highlight-night: linear-gradient(90deg, #C92 0%, #A70 100%);
+
+    /* Times */
+    --animation-duration: 0.75s;                                                /* Animation duration */
+
+    /* Urls */
+    --img-classic-day: url('src/Classic-day.svg');
+    --img-classic-night: url('src/Classic-night.svg');
+    --img-github-day: url('src/GitHub-day.svg');
+    --img-github-night: url('src/GitHub-night.svg');
+    --img-random-day: url('src/Random-day.svg');
+    --img-random-night: url('src/Random-night.svg');
 
 }
 
 
 /* Properties */
 
+::-webkit-scrollbar {
 
+    display: none;
+    
+}
 
 
 /* Universal Settings */
@@ -55,6 +74,15 @@ html.night {
 
 /* Classes */
 
+.back {
+
+    display: flex;
+    margin-left: 0;
+    margin-top: 5vh;
+    width: 3.5em;
+
+}
+
 .dot {
 
     clip-path: circle();
@@ -72,8 +100,8 @@ html.night {
     opacity: 1;
     transition-property: opacity, bottom, visibility;
     -webkit-transition-property:  opacity, bottom, visibility;
-    transition-duration: 1.5s;
-    -webkit-transition-duration: 1.5s;
+    transition-duration: var(--animation-duration);
+    -webkit-transition-duration: var(--animation-duration);
     visibility: visible;
     width: 30vw;
     z-index: -2;
@@ -90,13 +118,13 @@ html.night {
 
 .day .dot:nth-child(1) {
 
-    background: var(--dot1-day);
+    background: var(--pink-day);
 
 }
 
 .night .dot:nth-child(1) {
 
-    background: var(--dot1-night);
+    background: var(--pink-night);
 
 }
 
@@ -108,8 +136,8 @@ html.night {
     opacity: 1;
     transition-property: opacity, bottom, visibility;
     -webkit-transition-property:  opacity, bottom, visibility;
-    transition-duration: 1.5s;
-    -webkit-transition-duration: 1.5s;
+    transition-duration: var(--animation-duration);
+    -webkit-transition-duration: var(--animation-duration);
     visibility: visible;
     width: 35vw;
     z-index: -1;
@@ -126,13 +154,13 @@ html.night {
 
 .day .dot:nth-child(2) {
 
-    background: var(--dot2-day);
+    background: var(--blue-day);
 
 }
 
 .night .dot:nth-child(2) {
 
-    background: var(--dot2-night);
+    background: var(--blue-night);
 
 }
 
@@ -144,8 +172,8 @@ html.night {
     opacity: 1;
     transition-property: opacity, bottom, visibility;
     -webkit-transition-property:  opacity, bottom, visibility;
-    transition-duration: 1.5s;
-    -webkit-transition-duration: 1.5s;
+    transition-duration: var(--animation-duration);
+    -webkit-transition-duration: var(--animation-duration);
     visibility: visible;
     width: 20vw;
     z-index: -2;
@@ -162,13 +190,13 @@ html.night {
 
 .day .dot:nth-child(3) {
 
-    background: var(--dot3-day);
+    background: var(--green-day);
 
 }
 
 .night .dot:nth-child(3) {
 
-    background: var(--dot3-night);
+    background: var(--green-night);
 
 }
 
@@ -192,6 +220,11 @@ html.night {
 
 }
 
+.fin.footer {
+
+    opacity: 0;
+
+}
 
 .footer-author {
 
@@ -215,13 +248,13 @@ html.night {
 
 .day .footer-author::before {
 
-    content: url('src/GitHub-day.svg');
+    content: var(--img-github-day);
 
 }
 
 .night .footer-author::before {
 
-    content: url('src/GitHub-night.svg');
+    content: var(--img-github-night);
 
 }
 
@@ -236,8 +269,32 @@ html.night {
     text-align: center;
     transition-property: opacity;
     -webkit-transition-property: opacity;
-    transition-duration: 1.5s;
-    -webkit-transition-duration: 1.5s;
+    transition-duration: var(--animation-duration);
+    -webkit-transition-duration: var(--animation-duration);
+
+}
+
+.day .icon-classic::before {
+
+    content: var(--img-classic-day);
+
+}
+
+.night .icon-classic::before {
+
+    content: var(--img-classic-night);
+
+}
+
+.day .icon-random::before {
+
+    content: var(--img-random-day);
+
+}
+
+.night .icon-random::before {
+
+    content: var(--img-random-night);
 
 }
 
@@ -255,15 +312,111 @@ html.night {
     display: flex;
     flex: 1;
     font-size: 100%;
-    margin: 0;
     margin-left: 1%;
-    margin-block: 0;
 
 }
 
 .none {
 
     display: none;
+
+}
+
+.option {
+
+    background-repeat: no-repeat;
+    background-size: 0 100%;
+    border: .1em solid;
+    border-radius: .5em;
+    margin-top: 1em;
+    overflow: hidden;
+    transition: background-size .4s;
+
+}
+
+.day .option {
+
+    border-color: var(--text-day);
+    background-image: var(--highlight-day);
+
+}
+
+.night .option {
+
+    border-color: var(--text-night);
+    background-image: var(--highlight-night);
+
+}
+
+/* 
+    Reference source code & author:
+
+        https://stackoverflow.com/questions/52641628/sweep-to-the-right-transition-css, by @Fabrizio Calderan on StackOverflow
+    
+*/
+
+.option:hover, .option:focus-visible {
+
+    background-size: 100% 100%;
+
+}
+
+.option-container {
+
+    display: flex;
+    height: 50vh;
+
+}
+
+.option-container *{
+
+    display: flex;
+
+}
+
+.option-info {
+
+    font-size: 90%;
+
+}
+
+.setting-container {
+
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    opacity: 1;
+    transition-property: opacity, transform, visibility;
+    -webkit-transition-property:  opacity, transform, visibility;
+    transition-duration: var(--animation-duration);
+    -webkit-transition-duration: var(--animation-duration);
+    visibility: visible;
+
+}
+
+.hold .setting-container {
+
+    opacity: 0;
+    transform: translateY(56vh);
+    visibility: hidden;
+
+}
+
+.setting-info {
+
+    align-items: flex-start;
+    display: flex;
+    margin-right: 5vw;
+
+}
+
+.setting-title {
+
+    align-items: flex-end;
+    display: flex;
+    height: 10vh;
+    font-size: 130%;
+    width: 100%;
 
 }
 
@@ -276,8 +429,8 @@ html.night {
     opacity: 1;
     transition-property: opacity, transform, visibility;
     -webkit-transition-property:  opacity, transform, visibility;
-    transition-duration: 1.5s;
-    -webkit-transition-duration: 1.5s;
+    transition-duration: var(--animation-duration);
+    -webkit-transition-duration: var(--animation-duration);
     visibility: visible;
 
 }
@@ -303,7 +456,6 @@ html.night {
 
     align-items: flex-start;
     display: flex;
-    margin-block: 0;
     margin-top: .5em;
     margin-right: 5vw;
 
@@ -315,15 +467,7 @@ html.night {
     display: flex;
     font-size: 130%;
     height: 30vh;
-    margin: 0;
-    margin-block: 0;
     width: 100%;
-
-}
-
-.transparent {
-
-    opacity: 0;
 
 }
 
@@ -349,6 +493,8 @@ a {
     padding: .3em .5em;
     text-decoration: none;
     text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
 
 }
 
@@ -361,7 +507,7 @@ a {
 
 }
 
-.day a:hover {
+.day a:hover, .day a:focus-visible {
 
     background: var(--text-day);
     color: var(--bg-day);
@@ -379,7 +525,7 @@ a {
 
 }
 
-.night a:hover {
+.night a:hover, .night a:focus-visible {
 
     background: var(--text-night);
     color: var(--bg-night);
@@ -395,7 +541,7 @@ a.plain {
 
 }
 
-a.plain:hover {
+a.plain:hover, a.plain:focus-visible {
 
     background: none;
     border: none;
@@ -403,10 +549,86 @@ a.plain:hover {
 
 }
 
-.hold.setting {
+h1, h2, h3, h4, h5, h6, p {
 
-    display: none;
-    transition: none;
-    -webkit-transition: none;
+    cursor: default;
+    margin: 0;
+    margin-block: 0;
+    user-select: none;
+    -webkit-user-select: none;
+
+}
+
+h1, .option ,.option * {
+
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+
+}
+
+
+/* Screen width specific (RWD) */
+
+@media (max-width: 699px) {
+
+    .option-container {
+
+        flex-direction: column;
+        justify-content: flex-start;
+
+    }
+
+    .option {
+
+        flex-direction: column;
+        margin-right: 5vw;
+        padding: 1em;
+
+    }
+
+    .option-heading::before {
+
+        margin-right: .5em;
+
+    }
+
+    .option-info {
+
+        margin-left: 3.35em;
+        margin-top: -2em;
+
+    }
+
+}
+
+@media (min-width: 700px) {
+
+    .option-container {
+
+        flex-direction: row;
+        justify-content: space-around;
+    
+    }
+
+    .option-container * {
+
+        align-items: center;
+        flex-direction: column;
+
+    }
+
+    .option {
+
+        padding: 1em;
+        width: 20vw;
+
+    }
+
+    .option-heading::before {
+
+        margin-bottom: -0.3em;
+
+    }
 
 }
