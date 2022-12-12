@@ -22,8 +22,8 @@
     --text-night: #EEE;                                                        /* Text color (Night) */
 
     /* Gradients */
-    --highlight-day: linear-gradient(90deg, #FC5 0%, #D90 100%);
-    --highlight-night: linear-gradient(90deg, #C92 0%, #A70 100%);
+    --highlight-day: linear-gradient(90deg, #FC5 0%, #D90 100%);              /* Hover gradient (Day)*/
+    --highlight-night: linear-gradient(90deg, #C92 0%, #A70 100%);            /* Hover gradient (Night)*/
 
     /* Times */
     --animation-duration: 0.75s;                                                /* Animation duration */
@@ -57,38 +57,171 @@ html {
 
 }
 
-html.day {
+/* Screen width specific (RWD) */
+
+@media (max-width: 699px) {
+
+    .option-container {
+
+        flex-direction: column;
+        justify-content: flex-start;
+
+    }
+
+    .option {
+
+        flex-direction: column;
+        margin-right: 5vw;
+        padding: 1em;
+
+    }
+
+    .option .heading::before {
+
+        margin-right: .5em;
+
+    }
+
+    .option .desc {
+
+        margin-left: 3.35em;
+        margin-top: -2em;
+
+    }
+
+}
+
+@media (min-width: 700px) {
+
+    .option-container {
+
+        flex-direction: row;
+        justify-content: space-around;
+    
+    }
+
+    .option-container * {
+
+        align-items: center;
+        flex-direction: column;
+
+    }
+
+    .option {
+
+        padding: 1em;
+        width: 20vw;
+
+    }
+
+    .option .heading::before {
+
+        margin-bottom: -0.3em;
+
+    }
+
+}
+
+
+
+/* State-Indicating Classes */
+
+/**
+ * Bright theme's styles. [.day]
+ */
+ html.day {
 
     background: var(--bg-day);
     color: var(--text-day);
 
 }
 
-html.night {
+/**
+ * Control previous pages based on user's location. [.fin]
+ */
+
+/**
+ * Control upcomming pages based on user's location. [.hold]
+ */
+
+/**
+ * Dark theme's styles. [.night]
+ */
+ html.night {
 
     background: var(--bg-night);
     color: var(--text-night);
 
 }
 
+/**
+ * Remove the element. [.none]
+ */
+ .none {
 
-/* Classes */
-
-.back {
-
-    display: flex;
-    margin-left: 0;
-    margin-top: 5vh;
-    width: 3.5em;
+    display: none;
 
 }
 
+
+
+/* General Classes */
+
+/**
+ * Page structures' styles. [.container]
+ */
+.container {
+
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    opacity: 1;
+    transition-property: opacity, transform, visibility;
+    -webkit-transition-property:  opacity, transform, visibility;
+    transition-duration: var(--animation-duration);
+    -webkit-transition-duration: var(--animation-duration);
+    visibility: visible;
+
+}
+
+.hold .container {
+
+    opacity: 0;
+    transform: translateY(56vh);
+    visibility: hidden;
+
+}
+
+.fin .container {
+
+    opacity: 0;
+    transform: translateY(-56vh);
+    visibility: hidden;
+
+}
+
+/**
+ * Dots' styles. [.dot]
+ */
 .dot {
 
     clip-path: circle();
     display: flex;
     shape-outside: circle();
+    opacity: 1;
     position: absolute;
+    transition-property: opacity, bottom, visibility;
+    -webkit-transition-property:  opacity, bottom, visibility;
+    transition-duration: var(--animation-duration);
+    -webkit-transition-duration: var(--animation-duration);
+    visibility: visible;
+
+}
+
+.fin .dot {
+
+    opacity: 0;
+    visibility: hidden;
 
 }
 
@@ -97,12 +230,6 @@ html.night {
     bottom: 15%;
     height: 30vw;
     left: -8%;
-    opacity: 1;
-    transition-property: opacity, bottom, visibility;
-    -webkit-transition-property:  opacity, bottom, visibility;
-    transition-duration: var(--animation-duration);
-    -webkit-transition-duration: var(--animation-duration);
-    visibility: visible;
     width: 30vw;
     z-index: -2;
 
@@ -111,8 +238,6 @@ html.night {
 .fin .dot:nth-child(1) {
 
     bottom: 71%;
-    opacity: 0;
-    visibility: hidden;
 
 }
 
@@ -133,12 +258,6 @@ html.night {
     bottom: 25%;
     height: 35vw;
     left: 15%;
-    opacity: 1;
-    transition-property: opacity, bottom, visibility;
-    -webkit-transition-property:  opacity, bottom, visibility;
-    transition-duration: var(--animation-duration);
-    -webkit-transition-duration: var(--animation-duration);
-    visibility: visible;
     width: 35vw;
     z-index: -1;
 
@@ -147,8 +266,6 @@ html.night {
 .fin .dot:nth-child(2) {
 
     bottom: 81%;
-    opacity: 0;
-    visibility: hidden;
 
 }
 
@@ -169,12 +286,6 @@ html.night {
     bottom: 20%;
     height: 20vw;
     left: 40%;
-    opacity: 1;
-    transition-property: opacity, bottom, visibility;
-    -webkit-transition-property:  opacity, bottom, visibility;
-    transition-duration: var(--animation-duration);
-    -webkit-transition-duration: var(--animation-duration);
-    visibility: visible;
     width: 20vw;
     z-index: -2;
 
@@ -183,8 +294,6 @@ html.night {
 .fin .dot:nth-child(3) {
 
     bottom: 76%;
-    opacity: 0;
-    visibility: hidden;
 
 }
 
@@ -200,14 +309,50 @@ html.night {
 
 }
 
+/**
+ * External links' styles. [.exlink]
+ */
+.exlink {
+
+    display: flex;
+    flex: 1;
+    font-size: 0.8em;
+    font-weight: 400;
+    padding: 0;
+
+}
+
+.exlink.author {
+
+    justify-content: flex-end;
+
+}
+
+.exlink.author::before {
+
+    height: 1em;
+    margin-right: .5em;
+    width: 1em;
+
+}
+
+.exlink.repo {
+
+    justify-content: flex-start;
+
+}
+
+/**
+ * Footer's styles. [.footer]
+ */
 .footer {
 
     display: flex;
     bottom: 2vh;
     left: 0;
     position: fixed;
-    transition-property: opacity;
-    -webkit-transition-property: opacity;
+    transition-property: opacity, visibility;
+    -webkit-transition-property: opacity, visibility;
     transition-duration: .5s;
     -webkit-transition-duration: .5s;
     width: 100%;
@@ -223,82 +368,74 @@ html.night {
 .fin.footer {
 
     opacity: 0;
+    visibility: hidden;
 
 }
 
-.footer-author {
-
-    display: flex;
-    flex: 1;
-    font-size: 0.8em;
-    font-weight: 400;
-    justify-content: flex-end;
-    padding: 0;
-    text-align: center;
-
-}
-
-.footer-author::before {
-
-    height: 1em;
-    margin-right: .5em;
-    width: 1em;
-
-}
-
-.day .footer-author::before {
+/**
+ * Icons. [.icon]
+ */
+.day .icon.author::before {
 
     content: var(--img-github-day);
 
 }
 
-.night .footer-author::before {
+.night .icon.author::before {
 
     content: var(--img-github-night);
 
 }
-
-.footer-repo {
-
-    display: flex;
-    flex: 1;
-    font-size: 0.8em;
-    font-weight: 400;
-    justify-content: flex-start;
-    padding: 0;
-    text-align: center;
-    transition-property: opacity;
-    -webkit-transition-property: opacity;
-    transition-duration: var(--animation-duration);
-    -webkit-transition-duration: var(--animation-duration);
-
-}
-
-.day .icon-classic::before {
+.day .icon.classic::before {
 
     content: var(--img-classic-day);
 
 }
 
-.night .icon-classic::before {
+.night .icon.classic::before {
 
     content: var(--img-classic-night);
 
 }
 
-.day .icon-random::before {
+.day .icon.random::before {
 
     content: var(--img-random-day);
 
 }
 
-.night .icon-random::before {
+.night .icon.random::before {
 
     content: var(--img-random-night);
 
 }
 
+/**
+ * Subheadings' styles. [.info]
+ */
+.info {
 
+    align-items: flex-start;
+    display: flex;
+
+}
+
+.setting .info {
+
+    margin-right: 5vw;
+
+}
+
+.start .info {
+
+    margin-top: .5em;
+    margin-right: 5vw;
+
+}
+
+/**
+ * Navagation bars' styles. [.navbar]
+ */
 .navbar {
 
     display: flex;
@@ -306,22 +443,9 @@ html.night {
 
 }
 
-.nav-title {
-
-    align-items: center;
-    display: flex;
-    flex: 1;
-    font-size: 100%;
-    margin-left: 1%;
-
-}
-
-.none {
-
-    display: none;
-
-}
-
+/**
+ * Options' styles. [.option]
+ */
 .option {
 
     background-repeat: no-repeat;
@@ -361,6 +485,9 @@ html.night {
 
 }
 
+/**
+ * Option containers' styles. [.option-container]
+ */
 .option-container {
 
     display: flex;
@@ -374,103 +501,80 @@ html.night {
 
 }
 
-.option-info {
+/**
+ * Option descriptions' styles. [.option .desc]
+ */
+.option .desc {
 
     font-size: 90%;
 
 }
 
-.setting-container {
+/**
+ * Step buttons' styles. [.step]
+ */
+.step {
 
-    display: flex;
-    flex-direction: column;
-    margin-left: 5%;
-    opacity: 1;
-    transition-property: opacity, transform, visibility;
-    -webkit-transition-property:  opacity, transform, visibility;
-    transition-duration: var(--animation-duration);
-    -webkit-transition-duration: var(--animation-duration);
-    visibility: visible;
-
-}
-
-.hold .setting-container {
-
-    opacity: 0;
-    transform: translateY(56vh);
-    visibility: hidden;
-
-}
-
-.setting-info {
-
-    align-items: flex-start;
-    display: flex;
-    margin-right: 5vw;
-
-}
-
-.setting-title {
-
-    align-items: flex-end;
-    display: flex;
-    height: 10vh;
-    font-size: 130%;
-    width: 100%;
-
-}
-
-.start-container {
-
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-left: 5%;
-    opacity: 1;
-    transition-property: opacity, transform, visibility;
-    -webkit-transition-property:  opacity, transform, visibility;
-    transition-duration: var(--animation-duration);
-    -webkit-transition-duration: var(--animation-duration);
-    visibility: visible;
-
-}
-
-.fin .start-container {
-
-    opacity: 0;
-    transform: translateY(-56vh);
-    visibility: hidden;
-
-}
-
-.start-explore {
-
-    display: flex;
-    margin-left: 0;
     margin-top: 1em;
+
+}
+
+.step.left {
+
+    margin-left: 0;
+
+}
+
+.setting .step {
+
+    margin-top: 5vh;
+    width: 3.5em;
+
+}
+
+.start .step {
+
     width: 5em;
 
 }
 
-.start-info {
-
-    align-items: flex-start;
-    display: flex;
-    margin-top: .5em;
-    margin-right: 5vw;
-
-}
-
-.start-title {
+/**
+ * Headings' styles. [.title]
+ */
+.title {
 
     align-items: flex-end;
     display: flex;
     font-size: 130%;
-    height: 30vh;
     width: 100%;
 
 }
 
+.navbar .title {
+
+    align-items: center;
+    flex: 1;
+    font-size: 100%;
+    margin-left: 1%;
+    width: auto;
+
+}
+
+.setting .title {
+
+    height: 10vh;
+
+}
+
+.start .title {
+
+    height: 30vh;
+
+}
+
+/**
+ * Chinese font's styles. [.zh]
+ */
 .zh {
 
     font-family: var(--font-zh);
@@ -564,71 +668,5 @@ h1, .option ,.option * {
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
-
-}
-
-
-/* Screen width specific (RWD) */
-
-@media (max-width: 699px) {
-
-    .option-container {
-
-        flex-direction: column;
-        justify-content: flex-start;
-
-    }
-
-    .option {
-
-        flex-direction: column;
-        margin-right: 5vw;
-        padding: 1em;
-
-    }
-
-    .option-heading::before {
-
-        margin-right: .5em;
-
-    }
-
-    .option-info {
-
-        margin-left: 3.35em;
-        margin-top: -2em;
-
-    }
-
-}
-
-@media (min-width: 700px) {
-
-    .option-container {
-
-        flex-direction: row;
-        justify-content: space-around;
-    
-    }
-
-    .option-container * {
-
-        align-items: center;
-        flex-direction: column;
-
-    }
-
-    .option {
-
-        padding: 1em;
-        width: 20vw;
-
-    }
-
-    .option-heading::before {
-
-        margin-bottom: -0.3em;
-
-    }
 
 }

@@ -21,28 +21,28 @@
     <script id = "script-eel" type = "text/javascript" src = "/eel.js"></script>
     <script id = "script-api" type = "text/javascript" src = "api.js"></script>
     <script id = "script-locale" type = "text/javascript" src = "locale.js"></script>
-    <script id = "script-main" type = "text/javascript" src = "main.js"></script>
+    <script id = "script" type = "text/javascript" src = "main.js"></script>
 
 </head>
 <body>
 
-    <div id = "page-main" class = "-container">
+    <div id = "page">
 
-        <div id = "page-main-navbar" class = "navbar">
+        <div id = "page-navbar" class = "navbar">
 
-            <h1 id = "page-main-navbar-title" class = "nav-title" onclick = "move(0, 'absolute');">
+            <h1 id = "page-navbar-title" class = "title" onclick = "move(0, 'absolute');">
 
                 What 2 Eat
 
             </h1>
 
-            <a id = "page-main-navbar-mode"  href = "#" title = "Switch light/dark theme" class = "nav-mode">
+            <a id = "page-navbar-mode"  href = "#" title = "Switch light/dark theme">
 
                 ◐
 
             </a>
 
-            <a id = "page-main-navbar-language"  href = "#" title = "Switch to Chinese ／ 中文" class = "nav-lang">
+            <a id = "page-navbar-language"  href = "#" title = "Switch to Chinese ／ 中文">
 
                 中
 
@@ -51,25 +51,25 @@
         </div>
 
         <!-- Main Page -->
-        <div id = "page-main-start" class = "start">
+        <div id = "page-start" class = "start">
 
-            <div id = "page-main-start-dot1" class = "dot"></div>
-            <div id = "page-main-start-dot2" class = "dot"></div>
-            <div id = "page-main-start-dot3" class = "dot"></div>
+            <div id = "page-start-dot1" class = "dot"></div>
+            <div id = "page-start-dot2" class = "dot"></div>
+            <div id = "page-start-dot3" class = "dot"></div>
 
-            <div id = "page-main-start-container" class = "start-container">
+            <div id = "page-start-container" class = "container">
 
-                <h2 id = "page-main-start-subhedding" class = "start-title">
+                <h2 id = "page-start-subhedding" class = "title">
                 
                     Help you decide what&nbsp;to eat.
     
                 </h2>
-                <p id ="page-main-start-info" class = "start-info">
+                <p id ="page-start-info" class = "info">
 
                     Save time, save your stomach. 
 
                 </p>
-                <a id = "page-main-start-explore" href = "#" title = "Go to next step" class = "start-explore">
+                <a id = "page-start-explore" href = "#" title = "Go to next step" class = "step left">
     
                     Explore ❯
     
@@ -80,46 +80,46 @@
         </div>
 
         <!-- Setting Page -->
-        <div id = "page-main-setting" class = "setting hold none">
+        <div id = "page-setting" class = "setting hold none">
 
-            <div id = "page-main-setting-container" class = "setting-container">
+            <div id = "page-setting-container" class = "container">
 
-                <h3 id = "page-main-setting-caption" class = "setting-title">
+                <h3 id = "page-setting-caption" class = "title">
 
                     Customize the query.
 
                 </h3>
-                <p id = "page-main-setting-subheading" class = "setting-info">
+                <p id = "page-setting-subheading" class = "info">
 
                     Do it fast, or take it slow.
 
                 </p>
-                <div id = "page-main-setting-option-container" class = "option-container">
+                <div id = "page-setting-option-container" class = "option-container">
 
-                    <div id = "page-main-setting-option-random" title = "Random" class = "option" tabindex = "0">
+                    <div id = "page-setting-option-random" title = "Random" class = "option" tabindex = "0">
 
-                        <h4 id = "option-random-hedding" class = "option-heading icon-random">
+                        <h4 id = "option-random-hedding" class = "heading icon random">
 
                             Random
                             
                         </h4>
 
-                        <p id = "option-random-info" class = "option-info">
+                        <p id = "option-random-info" class = "desc">
 
                             Pick a restaurant right&nbsp;away. No time to&nbsp;waste!
 
                         </p>
 
                     </div>
-                    <div id = "page-main-setting-option-classic" title = "Classic" class = "option" tabindex = "0">
+                    <div id = "page-setting-option-classic" title = "Classic" class = "option" tabindex = "0">
 
-                        <h4 id = "option-classic-hedding" class = "option-heading icon-classic">
+                        <h4 id = "option-classic-hedding" class = "heading icon classic">
 
                             Classic
                             
                         </h4>
 
-                        <p id = "option-classic-info" class = "option-info">
+                        <p id = "option-classic-info" class = "desc">
 
                             Filter restaurants based&nbsp;on your answers.
 
@@ -128,7 +128,7 @@
                     </div>
 
                 </div>
-                <a id = "page-main-setting-back" href = "#" title = "Go back to last step" class = "back" onclick = "move(-1);">
+                <a id = "page-setting-back" href = "#" title = "Go back to last step" class = "step left" onclick = "move(-1);">
 
                     ❮ Back
 
@@ -139,15 +139,15 @@
         </div>
 
         <!-- Footer -->
-        <div id = "page-main-footer" class = "footer">
+        <div id = "page-footer" class = "footer">
 
-            <a id = "page-main-footer-author" href = "https://github.com/taipeinative" title = "See GitHub profile" class = "footer-author plain">
+            <a id = "page-footer-author" href = "https://github.com/taipeinative" title = "See GitHub profile" class = "exlink icon author plain">
 
                 taipeinative
 
             </a>
 
-            <a id = "page-main-footer-repo" href = "https://github.com/taipeinative/what-2-eat" title = "See GitHub repository" class = "footer-repo plain">
+            <a id = "page-footer-repo" href = "https://github.com/taipeinative/what-2-eat" title = "See GitHub repository" class = "exlink repo plain">
 
                 what-2-eat
 

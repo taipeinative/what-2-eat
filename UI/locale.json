@@ -24,67 +24,67 @@
         "zh": "幫你決定吃什麼！"
     },
     {
-        "id": "page-main-navbar-title",
+        "id": "page-navbar-title",
         "attr": "innerHTML",
         "en": "What 2 Eat",
         "zh": "吃什麼"
     },
     {
-        "id": "page-main-navbar-mode",
+        "id": "page-navbar-mode",
         "attr": "title",
         "en": "Switch light/dark theme",
         "zh": "切換淺色／深色主題"
     },
     {
-        "id": "page-main-navbar-language",
+        "id": "page-navbar-language",
         "attr": "innerHTML",
         "en": "中",
         "zh": "EN"
     },
     {
-        "id": "page-main-navbar-language",
+        "id": "page-navbar-language",
         "attr": "title",
         "en": "Switch to Chinese ／ 中文",
         "zh": "切換英文 ／ English"
     },
     {
-        "id": "page-main-start-subhedding",
+        "id": "page-start-subhedding",
         "attr": "innerHTML",
         "en": "Help you decide what&nbsp;to eat.",
         "zh": "幫你決定吃什麼。"
     },
     {
-        "id": "page-main-start-info",
+        "id": "page-start-info",
         "attr": "innerHTML",
         "en": "Save time, save your stomach.",
         "zh": "省時又省力。"
     },
     {
-        "id": "page-main-start-explore",
+        "id": "page-start-explore",
         "attr": "innerHTML",
         "en": "Explore ❯",
         "zh": "了解更多 ❯"
     },
     {
-        "id": "page-main-start-explore",
+        "id": "page-start-explore",
         "attr": "title",
         "en": "Go to next step",
         "zh": "下一步"
     },
     {
-        "id": "page-main-setting-caption",
+        "id": "page-setting-caption",
         "attr": "innerHTML",
         "en": "Customize the query.",
         "zh": "選擇模式："
     },
     {
-        "id": "page-main-setting-subheading",
+        "id": "page-setting-subheading",
         "attr": "innerHTML",
         "en": "Do it fast, or take it slow.",
         "zh": "隨機挑選，或是仔細篩選。"
     },
     {
-        "id": "page-main-setting-option-random",
+        "id": "page-setting-option-random",
         "attr": "title",
         "en": "Random",
         "zh": "隨機"
@@ -102,7 +102,7 @@
         "zh": "隨機挑選一間餐廳。"
     },
     {
-        "id": "page-main-setting-option-classic",
+        "id": "page-setting-option-classic",
         "attr": "title",
         "en": "Classic",
         "zh": "經典"
@@ -120,25 +120,25 @@
         "zh": "根據您的回答篩選餐廳。"
     },
     {
-        "id": "page-main-setting-back",
+        "id": "page-setting-back",
         "attr": "title",
         "en": "Go back to last step",
         "zh": "上一步"
     },
     {
-        "id": "page-main-setting-back",
+        "id": "page-setting-back",
         "attr": "innerHTML",
         "en": "❮ Back",
         "zh": "❮ 返回"
     },
     {
-        "id": "page-main-footer-author",
+        "id": "page-footer-author",
         "attr": "title",
         "en": "See GitHub profile",
         "zh": "GitHub檔案"
     },
     {
-        "id": "page-main-footer-repo",
+        "id": "page-footer-repo",
         "attr": "title",
         "en": "See GitHub repository",
         "zh": "GitHub存儲庫"

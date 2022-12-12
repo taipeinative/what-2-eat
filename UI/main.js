@@ -11,7 +11,7 @@ var currentIndex = 0;
  */
  function clickLanguage(fail) {
 
-  var button = document.getElementById('page-main-navbar-language');
+  var button = document.getElementById('page-navbar-language');
 
   switch (fail) {
 
@@ -47,7 +47,7 @@ var currentIndex = 0;
  */
 function clickTheme(init) {
 
-    var button = document.getElementById('page-main-navbar-mode');
+    var button = document.getElementById('page-navbar-mode');
     var html = document.getElementById("html");
 
     if (init == 'set') {
@@ -81,7 +81,7 @@ function clickTheme(init) {
  */
 function clickExplore() {
 
-    var button = document.getElementById('page-main-start-explore');
+    var button = document.getElementById('page-start-explore');
     
       button.addEventListener("click", function (e) {                       // Add an event listener to explore button; when button is clicked, do:
     
@@ -100,7 +100,7 @@ function clickExplore() {
  */
 function setPageNodes () {
 
-  pageList = document.querySelectorAll('#page-main > :not(:first-child):not(:last-child)');
+  pageList = document.querySelectorAll('#page > :not(:first-child):not(:last-child)');
   pageList.forEach(function(item){pageIdList.push(item.id)});
 
 }
@@ -123,12 +123,12 @@ async function move(steps = 1, mode = 'relative') {
         for (i = currentIndex ; i < ( currentIndex + count ) ; i++) {
 
           document.getElementById(pageIdList[i]).classList.add('fin');
-          if (i == 0) {document.getElementById('page-main-footer').classList.add('fin');} // Make current page shifts up
+          if (i == 0) {document.getElementById('page-footer').classList.add('fin');} // Make current page shifts up
 
           await delay(600);
 
           document.getElementById(pageIdList[i]).classList.add('none');
-          if (i == 0) {document.getElementById('page-main-footer').classList.add('none');} // Clear the space up
+          if (i == 0) {document.getElementById('page-footer').classList.add('none');} // Clear the space up
           document.getElementById(pageIdList[i+1]).classList.remove('none'); 
 
           await delay(50);
@@ -146,10 +146,10 @@ async function move(steps = 1, mode = 'relative') {
           document.getElementById(pageIdList[i]).classList.add('hold');
           await delay(600);
           document.getElementById(pageIdList[i]).classList.add('none');
-          if (i == 1) {document.getElementById('page-main-footer').classList.remove('none');}
+          if (i == 1) {document.getElementById('page-footer').classList.remove('none');}
           document.getElementById(pageIdList[i-1]).classList.remove('none');
           await delay(50);
-          if (i == 1) {document.getElementById('page-main-footer').classList.remove('fin');}
+          if (i == 1) {document.getElementById('page-footer').classList.remove('fin');}
           document.getElementById(pageIdList[i-1]).classList.remove('fin');
 
         }
