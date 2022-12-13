@@ -56,7 +56,8 @@ window.onload = function () {                                           // Fires
 
   }
 
-  clickExplore();                                                       // Add an event listener to explore button
+  clickStep();                                                          // Set event listeners to step buttons
+  clickForm();                                                          // Set event listeners to form elements
   clickTheme('set');                                                    // Add an event listener to theme button
   setPageNodes();
 

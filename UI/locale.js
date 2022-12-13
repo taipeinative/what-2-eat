@@ -9,7 +9,7 @@ var language = 'en';
  */
 function localeUpdate() {
 
-    document.getElementById('html').classList.toggle("zh");
+    document.getElementById('html').classList.toggle('zh');
 
     /*
       

@@ -24,13 +24,13 @@
         "zh": "幫你決定吃什麼！"
     },
     {
-        "id": "page-navbar-title",
+        "id": "page-navbar-home",
         "attr": "innerHTML",
         "en": "What 2 Eat",
         "zh": "吃什麼"
     },
     {
-        "id": "page-navbar-mode",
+        "id": "page-navbar-theme",
         "attr": "title",
         "en": "Switch light/dark theme",
         "zh": "切換淺色／深色主題"
@@ -48,7 +48,7 @@
         "zh": "切換英文 ／ English"
     },
     {
-        "id": "page-start-subhedding",
+        "id": "page-start-title",
         "attr": "innerHTML",
         "en": "Help you decide what&nbsp;to eat.",
         "zh": "幫你決定吃什麼。"
@@ -72,13 +72,13 @@
         "zh": "下一步"
     },
     {
-        "id": "page-setting-caption",
+        "id": "page-setting-title",
         "attr": "innerHTML",
         "en": "Customize the query.",
         "zh": "選擇模式："
     },
     {
-        "id": "page-setting-subheading",
+        "id": "page-setting-info",
         "attr": "innerHTML",
         "en": "Do it fast, or take it slow.",
         "zh": "隨機挑選，或是仔細篩選。"
@@ -120,16 +120,28 @@
         "zh": "根據您的回答篩選餐廳。"
     },
     {
-        "id": "page-setting-back",
+        "id": "page-setting-stepbar-back",
         "attr": "title",
         "en": "Go back to last step",
         "zh": "上一步"
     },
     {
-        "id": "page-setting-back",
+        "id": "page-setting-stepbar-back",
         "attr": "innerHTML",
         "en": "❮ Back",
         "zh": "❮ 返回"
+    },
+    {
+        "id": "page-setting-stepbar-advanced",
+        "attr": "title",
+        "en": "Go to advanced setting",
+        "zh": "進階設定"
+    },
+    {
+        "id": "page-setting-stepbar-advanced",
+        "attr": "innerHTML",
+        "en": "🛠 Advanced",
+        "zh": "🛠 進階設定"
     },
     {
         "id": "page-footer-author",
