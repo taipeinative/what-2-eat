@@ -1,6 +1,7 @@
 import eel                                      # Import eel module to manage interfaces
 import json                                     # Import json module to handle .json files
 from os import path as p                        # Import os.path module to build relative paths
+import readfile as rf                           # Import readfile module to retrieve data from Excel.
 
 
 ### Main workflow ###
@@ -64,5 +65,33 @@ def getLocaleFile():                            # The method helping JavaScript 
     f = open(new_path, encoding = 'utf-8')      # Read locale file with utf-8 encoding
     locale = json.load(f)                       # Parse JSON from the file
     return json.dumps(locale, ensure_ascii = False) # Dump JSON into string with unicodes
+
+@eel.expose
+def getSheetData(column: str):                  # The method helping JavaScript get sheet data.
+    '''
+    [For JavaScript] Request all avalable sheet data from file `Restaurants.xlsx`.
+
+    Parameters
+    ---------
+    column : str
+        The columns searching for; for example, `Type` or `Name`.
+
+    Returns
+    --------
+    values : list
+        All non-repeat value in the given column.
+
+    Examples
+    --------
+    In `Restaurants.xlsx`:
+    >>> [{"n": "Alex", "g": "M"}, {"n": "Anne", "g": "F"}, {"n": "Bill", "g": "M"}, {"n": "Beck", "g": "M"}]
+
+    In `api.js`, assume already in an async function:
+    >>> a = await eel.getSheetData('g')();
+    >>> console.log(a);
+    ['M','F']
+    '''
+    values = rf.Sheet().unique(column)
+    return values
 
 if __name__ == '__main__': main()               # Run the file since __name__ default to be __main__ outside a class

@@ -57,8 +57,8 @@ window.onload = function () {                                           // Fires
   }
 
   clickStep();                                                          // Set event listeners to step buttons
-  clickForm();                                                          // Set event listeners to form elements
   clickTheme('set');                                                    // Add an event listener to theme button
+  clickForm();                                                          // Set event listeners to form elements
   setPageNodes();
 
 };

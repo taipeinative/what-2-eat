@@ -3,20 +3,23 @@ var pageList = [];
 var pageIdList = [];
 var currentIndex = 0;
 var eelState = true;
+var dayTheme = true;
 
 // Event Listeners
 
 /**
- * Polyfill the \<select\> element behaviour using vanilla JavaScript, and include generateOptions() function to create options.
+ * Polyfill the form related elements' (including \<select\>, sliders) behaviour using vanilla JavaScript, and include generateOptions() function to create dropdown options.
  */
 function clickForm() {
 
-  generateOptions(10);
+  // For .dropdown class
 
-  const selectList = document.querySelectorAll('.select .menu');                    // Find all <input> elements with .menu class, which are going to become <select>
-  const selectOptionList = document.querySelectorAll('.list .list-option');         // Find all <li> elements with .list class, which are going to become <option>
+  generateOptions(10);                                                            // Generate options for dropdowns
 
-  selectList.forEach(item => {                                                      // Add focusin and focusout event listeners to all <input> elements.
+  const dropList = document.querySelectorAll('.dropdown');                        // Find all <input> elements with .dropdown class, which are going to become <select>
+  const dropOptionList = document.querySelectorAll('.list .list-option');         // Find all <li> elements with .list class, which are going to become <option>
+
+  dropList.forEach(item => {                                                      // Add focusin and focusout event listeners to all <input> elements.
 
     item.addEventListener('focusin', e => {
 
@@ -35,18 +38,72 @@ function clickForm() {
 
   });
 
-  selectOptionList.forEach(item => {
+  dropOptionList.forEach(item => {
 
     item.addEventListener('click', e => {                                           // Add click event listeners to all <li> elements.
 
-      var menu = document.querySelectorAll(`.select:has(#${CSS.escape(item.id)}) .menu`)[0];
-      menu.value = ` ${item.innerHTML}`;                                            // Replace parent <input> element's value attribute to chosen option's text
-      menu.setAttribute('title', menu.value);
+      var dropdown = document.querySelectorAll(`.input:has(#${CSS.escape(item.id)}) .dropdown`)[0];
+      dropdown.value = ` ${item.innerHTML}`;                                            // Replace parent <input> element's value attribute to chosen option's text
+      dropdown.setAttribute('title', dropdown.value);
       e.preventDefault();
 
     })
 
   })
+
+  // For .slider class
+
+  const sliderList = document.querySelectorAll('.slider');
+
+  sliderList.forEach(item => {
+
+    if (item.classList.contains('price')) {
+
+      item.setAttribute('min','50');
+      item.setAttribute('max','305');
+      item.setAttribute('step','5');
+      item.setAttribute('value','150');
+      var preview = document.querySelectorAll(`div:has(#${CSS.escape(item.id)}) .preview`)[0];
+      preview.innerHTML = item.value;
+      updateBackground()
+
+      item.addEventListener('input', e => {
+
+        switch (parseInt(item.value)) {
+
+          case 305:
+
+            preview.classList.remove('no-translate');
+
+            if (eelState) {
+
+              localeUpdate([`${preview.id}`]);
+
+            } else {
+
+              preview.innerHTML = 'No price limit';
+
+            }
+
+            break;
+
+          default:
+
+            preview.classList.add('no-translate');
+            preview.innerHTML = item.value;
+            break;
+
+        }
+
+        updateBackground()
+
+        e.preventDefault();
+
+      })
+
+    }
+
+  });
 
 }
 
@@ -148,6 +205,7 @@ function clickTheme(init) {
     if ((currentTime < 7) || (currentTime > 17)) {
 
       html.classList.toggle('night');
+      dayTheme = !dayTheme;
 
     } else {
 
@@ -161,6 +219,8 @@ function clickTheme(init) {
 
     html.classList.toggle('night');
     html.classList.toggle('day');
+    dayTheme = !dayTheme;
+    updateBackground();
     e.preventDefault();                                                   // Prevent default behaviour (because we don't want <a> element actually triggered)
 
   });
@@ -195,38 +255,66 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
  */
 function generateOptions(quantity = 5, useDefault = true) {
 
-  switch (eelState) {
+  const insertList = document.querySelectorAll('.input:has(.dropdown)');
 
-    case false:
+  if (eelState) {
 
-      const insertList = document.querySelectorAll('.select');
-      insertList.forEach((item,order) => {
+    insertList.forEach(item => {
 
-        var autoMenu = document.createElement('ul');
-        autoMenu.setAttribute('id',`page-q${order+1}-option-list`);
-        autoMenu.setAttribute('class','list none');
+      item.classList.add('eel');
 
-        for (i = 0; i < quantity; i++) {
-
-          var autoOption = document.createElement('li');
-          autoOption.setAttribute('id',`page-q${order+1}-option-${i+1}`);
-          autoOption.setAttribute('class','list-option');
-          autoOption.setAttribute('title',`Option ${i+1}`);
-          autoOption.textContent = `Option ${i+1}`;
-          autoMenu.appendChild(autoOption);
-
-        }
-
-        var icon = document.createElement('span');
-        item.append(icon, autoMenu);
-        var menu = item.querySelectorAll(':scope .menu')[0];
-        (useDefault) ? menu.setAttribute('value',` Option 1`) : null;
-        menu.setAttribute('title', menu.value);
-
-      });
-      break;
+    })
 
   }
+
+  insertList.forEach(async (item,order) => {
+
+    var initial;
+    var dropdown = item.querySelectorAll(':scope .dropdown')[0];
+    var autoMenu = document.createElement('ul');
+    autoMenu.setAttribute('id',`page-q${order+1}-option-list`);
+    autoMenu.setAttribute('class','list none');
+        
+    // For places
+
+    if (dropdown.classList.contains('place') && item.classList.contains('eel')) {
+
+      Places = await eel.getSheetData('Place')();
+
+      for (i = 0; i < Places.length; i++) {
+
+        var autoOption = document.createElement('li');
+        autoOption.setAttribute('id',`page-q${order+1}-option-${i+1}`);
+        autoOption.setAttribute('class','list-option');
+        autoOption.setAttribute('title',Places[i]);
+        autoOption.textContent = Places[i];
+        autoMenu.appendChild(autoOption);
+        (i == 0) ? (initial = Places[i]) : null;
+  
+      }
+
+    } else {
+
+      for (i = 0; i < quantity; i++) {
+
+        var autoOption = document.createElement('li');
+        autoOption.setAttribute('id',`page-q${order+1}-option-${i+1}`);
+        autoOption.setAttribute('class','list-option');
+        autoOption.setAttribute('title',`Option ${i+1}`);
+        autoOption.textContent = `Option ${i+1}`;
+        autoMenu.appendChild(autoOption);
+        initial = 'Option 1';
+  
+      }
+
+    }
+
+    var icon = document.createElement('span');
+    item.append(icon, autoMenu);
+    (useDefault) ? dropdown.setAttribute('value',` ${initial}`) : null;
+    dropdown.setAttribute('title', dropdown.value);
+
+  })
 
 }
 
@@ -237,7 +325,7 @@ function generateOptions(quantity = 5, useDefault = true) {
 function setPageNodes () {
 
   pageList = document.querySelectorAll('#page > :not(:first-child):not(:last-child)');
-  pageList.forEach(function(item){pageIdList.push(item.id)});
+  pageList.forEach(item => {pageIdList.push(item.id);});
 
 }
 
@@ -318,5 +406,25 @@ async function move(steps = 1, mode = 'relative') {
     throw (new Error(`Index Error: steps must be an integer`));
 
   }
+
+}
+
+/*
+
+  Reference source code & author:
+
+    https://stackoverflow.com/questions/18389224/how-to-style-html5-range-input-to-have-different-color-before-and-after-slider, by @dargue3 on StackOverflow
+
+*/
+function updateBackground() {
+
+  document.querySelectorAll('.slider').forEach(item => {
+
+    var borderValue = (item.value - item.min) / (item.max - item.min) * 100;
+    var dayNight = (dayTheme) ? 'day' : 'night';
+    item.style.background = `linear-gradient(to right, var(--input-${dayNight}) 0%, var(--input-${dayNight}) ${borderValue}%, var(--list-${dayNight}) ${borderValue}%, var(--list-${dayNight}) 100%)`;
+    item.style.border = `linear-gradient(to right, var(--input-${dayNight}) 0%, var(--input-${dayNight}) ${borderValue}%, var(--list-${dayNight}) ${borderValue}%, var(--list-${dayNight}) 100%)`;
+
+  });
 
 }

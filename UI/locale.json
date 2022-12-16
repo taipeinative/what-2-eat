@@ -144,6 +144,84 @@
         "zh": "🛠 進階設定"
     },
     {
+        "id": "page-q1-title",
+        "attr": "innerHTML",
+        "en": "Where are you?",
+        "zh": "你現在在哪裡？"
+    },
+    {
+        "id": "page-q1-info",
+        "attr": "innerHTML",
+        "en": "Please choose an option.",
+        "zh": "請選擇一個選項。"
+    },
+    {
+        "id": "page-q1-stepbar-back",
+        "attr": "title",
+        "en": "Go back to last step",
+        "zh": "上一步"
+    },
+    {
+        "id": "page-q1-stepbar-back",
+        "attr": "innerHTML",
+        "en": "❮ Back",
+        "zh": "❮ 返回"
+    },
+    {
+        "id": "page-q1-stepbar-next",
+        "attr": "title",
+        "en": "Go to next step",
+        "zh": "下一步"
+    },
+    {
+        "id": "page-q1-stepbar-next",
+        "attr": "innerHTML",
+        "en": "Next ❯",
+        "zh": "繼續 ❯"
+    },
+    {
+        "id": "page-q2-title",
+        "attr": "innerHTML",
+        "en": "What's your budget?",
+        "zh": "你的預算有多少？"
+    },
+    {
+        "id": "page-q2-info",
+        "attr": "innerHTML",
+        "en": "Please drag the slider.",
+        "zh": "請拖曳滑塊。"
+    },
+    {
+        "id": "page-q2-preview",
+        "attr": "innerHTML",
+        "en": "No price limit",
+        "zh": "無限制"
+    },
+    {
+        "id": "page-q2-stepbar-back",
+        "attr": "title",
+        "en": "Go back to last step",
+        "zh": "上一步"
+    },
+    {
+        "id": "page-q2-stepbar-back",
+        "attr": "innerHTML",
+        "en": "❮ Back",
+        "zh": "❮ 返回"
+    },
+    {
+        "id": "page-q2-stepbar-next",
+        "attr": "title",
+        "en": "Go to next step",
+        "zh": "下一步"
+    },
+    {
+        "id": "page-q2-stepbar-next",
+        "attr": "innerHTML",
+        "en": "Next ❯",
+        "zh": "繼續 ❯"
+    },
+    {
         "id": "page-footer-author",
         "attr": "title",
         "en": "See GitHub profile",

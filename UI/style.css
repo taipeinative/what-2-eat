@@ -379,6 +379,43 @@ html {
 }
 
 /**
+ *  Polyfill <select> element's exterior [.dropdown] 
+ */
+.dropdown {
+
+    appearance: none;
+    background: none;
+    border: none;
+    font-family: var(--font-en);
+    font-size: 100%;
+    margin-top: 10vh;
+    padding: 0;
+    width: 100%;
+
+}
+
+.day .dropdown {
+
+    border-bottom: .1em var(--text-day) solid;
+    color: var(--text-day);
+
+}
+
+.night .dropdown {
+
+    border-bottom: .1em var(--text-night) solid;
+    color: var(--text-night);
+
+}
+
+.dropdown::selection {
+
+    background: inherit;
+    color: inherit;
+
+}
+
+/**
  * External links' styles. [.exlink]
  */
 .exlink {
@@ -503,6 +540,16 @@ html {
 }
 
 /**
+ * The container to contain <input> elements. [.input] 
+ */
+ .input {
+
+    height: 50vh;
+    position: relative;
+
+ }
+
+/**
  * Polyfill <select> element's dropdown [.list] 
  */
 .list {
@@ -537,7 +584,7 @@ html {
 }
 
 /**
- * Polyfill <select> element's dropdown [.list-option] 
+ * Polyfill <select> element's dropdown option [.list-option] 
  */
 .list-option {
 
@@ -639,14 +686,69 @@ html {
 }
 
 /**
- * Polyfill <select> element [.select] 
+ * Price values' styles. [.preview]
  */
- .select {
+.preview {
 
-    height: 50vh;
-    position: relative;
+    font-size: 150%;
+    margin-bottom: 3vh;
+    margin-top: 10vh;
+    text-align: center;
 
- }
+}
+
+/**
+ * Sliders' styles. [.slider]
+ */
+.slider {
+
+    appearance: none;
+    border: .1em solid;
+    border-radius: 1em;
+    height: 1em;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+}
+
+.day .slider {
+
+    background: var(--list-day);
+    border: var(--list-day);
+
+}
+
+.night .slider {
+
+    background: var(--list-night);
+    border: var(--list-night);
+
+}
+
+.slider::-webkit-slider-thumb {
+
+    appearance: none;
+    border: .1em solid;
+    border-radius: 1.5em;
+    height: 1.5em;
+    width: 1.5em;
+
+}
+
+.day .slider::-webkit-slider-thumb {
+
+    background: var(--scroll-day);
+    border: var(--scroll-day);
+
+}
+
+.night .slider::-webkit-slider-thumb {
+
+    background: var(--scroll-night);
+    border: var(--scroll-night);
+
+}
 
 /**
  * Step buttons' styles. [.step]
@@ -816,48 +918,13 @@ a.plain:where(:hover,:focus-visible) {
 
 }
 
-.select input {
-
-    appearance: none;
-    background: none;
-    border: none;
-    font-family: var(--font-en);
-    font-size: 100%;
-    margin-top: 10vh;
-    padding: 0;
-    width: 100%;
-
-}
-
-.day .select input {
-
-    border-bottom: .1em var(--text-day) solid;
-    color: var(--text-day);
-
-}
-
-.night .select input {
-
-    border-bottom: .1em var(--text-night) solid;
-    color: var(--text-night);
-
-}
-
-.select input::selection {
-
-    background: inherit;
-    color: inherit;
-
-}
-
-
 /*
     Reference source code & author:
 
         https://www.sitepoint.com/css3-transform-background-image/, by Craig Buckler on sitepoint
 
 */
-.select input + span::after {
+.dropdown + span::after {
 
     content: "";
     height: 1em;
@@ -871,43 +938,43 @@ a.plain:where(:hover,:focus-visible) {
 
 }
 
-.day .select input + span::after {
+.day .dropdown + span::after {
 
     background: var(--img-drop-day) 0/1em no-repeat;
 
 }
 
-.night .select input + span::after {
+.night .dropdown + span::after {
 
     background: var(--img-drop-night) 0/1em no-repeat;
 
 }
 
-.select input:focus {
+.dropdown:focus {
 
     outline: none;
 
 }
 
-.select input:hover + span::after {
+.dropdown:hover + span::after {
 
     transform: translateY(.1em);
 
 }
 
-.select input:focus + span::after {
+.dropdown:focus + span::after {
 
     transform: rotate(180deg);
 
 }
 
-.day .select input:where(:hover,:focus) {
+.day .dropdown:where(:hover,:focus) {
 
     border-bottom-color: var(--input-day);
 
 }
 
-.night .select input:where(:hover,:focus) {
+.night .dropdown:where(:hover,:focus) {
 
     border-bottom-color: var(--input-night);
 
@@ -927,7 +994,7 @@ h2, h3, h4, h5, h6, p, ul {
 /**
  *  Pointer cursors
  */
-h1, .select input, li, .option ,.option * {
+h1, li, .dropdown, .option ,.option *, .slider, .slider::-webkit-slider-thumb {
 
     cursor: pointer;
 
@@ -945,7 +1012,7 @@ h1, .select input, li, .option ,.option * {
 /**
  *  Disable selections
  */
- a, h1, h2, h3, h4, h5, h6, .select input, li, p, ul, .option ,.option * {
+ a, h1, h2, h3, h4, h5, h6, li, p, ul, .dropdown, .option ,.option * {
 
     -webkit-user-select: none;
     user-select: none;

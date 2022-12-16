@@ -245,6 +245,31 @@ class Sheet():
 
             return None # Return `None` if the dataframe is empty
 
+    def unique(self, place: str):
+        '''
+        Find unique data on given column.
+
+        Parameters
+        --------
+        place : str
+            The column to be search.
+
+        Returns
+        --------
+        result : list
+            All unique value in a list.
+
+        Examples
+        --------
+        >>> df = rf.Sheet()
+        >>> df.set_df(pd.DataFrame({
+                'Type': ['Rice','Noodle','Rice'],
+                'Name': ['TR Bento Taipei Branch', 'Toscanini Pasta', 'Hi Sushi']
+            }))
+        >>> df.unique('Type')
+        ['Rice', 'Noodle']
+        '''
+        return self.df[place].unique().tolist()
 
 def timestamp(msg):
     '''

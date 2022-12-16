@@ -6,8 +6,25 @@ var language = 'en';
   
 /**
  * Parse JSON data and translate the page.
+ * @param {Array} [Ids = false] - Specific ids to be update; default to be `false`, and only accepts for Array. When the parameter is set, only update the given ids in current language.
  */
-function localeUpdate() {
+function localeUpdate(Ids = false) {
+
+  if (Array.isArray(Ids)) {
+
+    Ids.forEach(item => {
+
+      var obj = locale.filter(data => {
+
+        return data.id.match(item);
+
+      });
+
+      document.getElementById(item).innerHTML = obj[0][language];
+
+    });
+
+  } else {
 
     document.getElementById('html').classList.toggle('zh');
 
@@ -62,9 +79,17 @@ function localeUpdate() {
       
     */
     for ( var i = 0; i < locale.length; i++ ) {
-  
-      document.getElementById(locale[i].id)[locale[i].attr] = locale[i][language];
+      
+      var item = document.getElementById(locale[i].id);
+
+      if (item.classList.contains('no-translate') == false) {
+
+        item[locale[i].attr] = locale[i][language];
+
+      }
   
     }
+
+  }
 
 }
