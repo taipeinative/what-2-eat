@@ -1,6 +1,7 @@
 import eel                                      # Import eel module to manage interfaces
-import json                                     # Import json module to handle .json files
+from json import load,dumps                     # Import json module to handle .json files
 from os import path as p                        # Import os.path module to build relative paths
+from pandas import concat                       # Import pandas module to handle dataframes
 import readfile as rf                           # Import readfile module to retrieve data from Excel.
 
 
@@ -63,8 +64,8 @@ def getLocaleFile():                            # The method helping JavaScript 
     new_path = p.relpath( 'UI\\locale.json' , current_path) # Generate file path to locale file based on relative file path 
                                                             # (Expected output: C:\your\file\path\UI\locale.json)
     f = open(new_path, encoding = 'utf-8')      # Read locale file with utf-8 encoding
-    locale = json.load(f)                       # Parse JSON from the file
-    return json.dumps(locale, ensure_ascii = False) # Dump JSON into string with unicodes
+    locale = load(f)                            # Parse JSON from the file
+    return dumps(locale, ensure_ascii = False) # Dump JSON into string with unicodes
 
 @eel.expose
 def getSheetData(column: str):                  # The method helping JavaScript get sheet data.
@@ -95,7 +96,7 @@ def getSheetData(column: str):                  # The method helping JavaScript 
     return values
 
 @eel.expose
-def analyze(place: str, type: str, price: int , time: bool = True):
+def analyze(place: str = '公館', type: str = '臺式', price: int = 10000, time: bool = True , random: bool = False):
     '''
     [For JavaScript] Analyze the result of the query.
 
@@ -113,15 +114,19 @@ def analyze(place: str, type: str, price: int , time: bool = True):
     time : bool
         Whether apply current time to search, default to be `True`
 
+    random : bool
+        Whether pick random items or not.
+    
     Returns
     --------
-    result : json
+    json_str : json
         The result json file with everything frontend needs.
 
     Examples
     --------
 
     '''
+    print(f'You entered: analyze(place={place},type={type},price={price},time={time},random={random})')
     df = rf.Sheet()
 
     if (time):
@@ -129,9 +134,38 @@ def analyze(place: str, type: str, price: int , time: bool = True):
         df.set_df(df.filter_time())
     
     df.set_df(df.filter_price(price))
-    df.set_df(df.query([place], column = ['Place']))
-    df.set_df(df.query([type], column = ['Type']))
-    result = df.df.filter(['Name','Address','Review','Google_Map']).to_json(orient = 'index',force_ascii = False)
-    return result
+
+    if (random != True):
+
+        df.set_df(df.query([place], column = ['Place']))
+        df.set_df(df.query([type], column = ['Type']))
+
+    else:
+
+        try:
+
+            df.set_df(df.df.sample(n = 3))
+
+        except:
+
+            print('df.set_df(df.df.sample(n = 3)): failed')
+
+    filtered = df.df.filter(['Review','Name','Address','Google_Map','Distance','Low'])
+
+    try:
+
+        rank1st = filtered.loc[[filtered['Review'].astype('float64').idxmax()]]
+        cheapest = filtered.loc[[filtered['Low'].astype('float64').idxmin()]]
+        fastest = filtered.loc[[filtered['Distance'].astype('float64').idxmin()]]
+        result = concat([rank1st,cheapest,fastest]).filter(['Review','Name','Address','Google_Map']).reset_index(drop = True)
+        print(result)
+
+    except:
+
+        print('There are no restaurant open right now')
+        result = df.df
+
+    json_str = result.to_json(orient = 'records',force_ascii = False)
+    return json_str
 
 if __name__ == '__main__': main()               # Run the file since __name__ default to be __main__ outside a class

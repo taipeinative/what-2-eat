@@ -69,14 +69,17 @@ class Sheet():
 
         '''
         result_df = pd.DataFrame(columns = self.df.columns.values)              # Initialize the dataframe
+        low = []
 
         for i in range(len(self.df.index)):
 
              if (max_price >= int(self.df.iat[i, 2].split('~')[0])):
 
+                low.append(int(self.df.iat[i, 2].split('~')[0]))
                 result_df = pd.concat([result_df, self.df.iloc[[i]]])
 
         result = result_df.dropna(how = 'all').sort_index()  # Drop the first row (the initial `result_df`)
+        result['Low'] = low
 
         return result
 

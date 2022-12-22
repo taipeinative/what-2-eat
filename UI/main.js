@@ -4,6 +4,7 @@ var pageIdList = [];
 var currentIndex = 0;
 var eelState = true;
 var dayTheme = true;
+var resultJSON;
 
 // Event Listeners
 
@@ -153,7 +154,7 @@ function clickStep() {
   const backList = document.querySelectorAll('.back');                      // Find all elements with .back class
   const homeList = document.querySelectorAll('.home');                      // Find all elements with .home class
   const nextList = document.querySelectorAll('.next');                      // Find all elements with .next class
-  const resultList = document.querySelectorAll('.result');                  // Find all elements with .result class
+  const completeList = document.querySelectorAll('.complete');              // Find all elements with .result class
 
   backList.forEach(button => {                                              // Add click event listners to items of backList
 
@@ -188,22 +189,63 @@ function clickStep() {
 
   });
 
-  for (i = 0; i < resultList.length; i++) {                                 // DO NOT use async/await in Array.prototype.forEach()! (See comments in generateOptions() for more information)
+  for (i = 0; i < completeList.length; i++) {                                 // DO NOT use async/await in Array.prototype.forEach()! (See comments in generateOptions() for more information)
 
-    var button = resultList[i];
-    button.addEventListener('click', async e => {
+    var button = completeList[i];
+    if (button.id == 'page-setting-option-random') {
 
-      if (eelState == true) {
+      button.addEventListener('click', async e => {
 
-        result = await eel.analyze('公館','日式',500)();
-        console.log(typeof(result));
-        console.log(result);
+        if (eelState == true) {
 
-      }
-      
-      e.preventDefault();
+          result = await eel.analyze('A','A',1000,random = true)();
+          await parseResult(result);
 
-    });
+        } else {
+
+          await parseResult();
+
+        }
+
+        move(5,'absolute');
+        e.preventDefault();
+
+      });
+
+    } else {
+
+      button.addEventListener('click', async e => {
+
+        if (eelState == true) {
+
+          var q1 = document.getElementById('page-q1-input').value.substring(1);
+          var q2 = document.getElementById('page-q2-input').value.substring(1);
+
+          if (typeof(document.getElementById('page-q3-preview').innerHTML) == 'string') {
+
+            var q3 = 1000;
+
+          } else {
+
+            var q3 = document.getElementById('page-q3-preview').innerHTML;
+
+          }
+
+          result = await eel.analyze(q1,q2,q3)();
+          await parseResult(result);
+
+        } else {
+
+          await parseResult();
+
+        }
+
+        move(5,'absolute');
+        e.preventDefault();
+
+      });
+
+    }
 
   }
   
@@ -378,7 +420,6 @@ async function generateOptions(quantity = 5, useDefault = true) {
 
 }
 
-
 /**
  * Collect all page nodes except for navagation bar and footer.
  */
@@ -466,6 +507,184 @@ async function move(steps = 1, mode = 'relative') {
     throw (new Error(`Index Error: steps must be an integer`));
 
   }
+
+}
+
+async function parseResult(json = false) {
+
+  const star = [];
+  const title = [];
+  const address = [];
+  const mapLink = [];
+  const starHTML = document.querySelectorAll('.result-star');
+  const titleHTML = document.querySelectorAll('.result-title');
+  const addressHTML = document.querySelectorAll('.result-link');
+  var open_state = true;
+
+  if (json == false) {
+
+    for (i = 0; i < 3; i ++) {
+
+      star.push(randomStar());
+      title.push(randomString(18));
+      address.push(randomString(16));
+      mapLink.push(`https://goo.gl/maps/${randomString(17)}`);
+
+    }
+
+  } else {
+
+    if (json != '[]') {
+
+      resultJSON = JSON.parse(json);
+
+      for (i = 0; i < 3; i ++) {
+
+        star.push(randomStar(resultJSON[i].Review));
+        title.push(resultJSON[i].Name);
+        address.push(resultJSON[i].Address);
+        mapLink.push(resultJSON[i].Google_Map);
+
+      }
+
+    } else {
+
+      var open_state = false;
+      for (i = 0; i < 3; i ++) {
+
+        star.push('X.X');
+        title.push('No matched restaurants.');
+        address.push('All recorded restaurants are not open now. Please come again later!');
+        mapLink.push('#');
+
+      }
+      
+    }
+
+  }
+
+  starHTML.forEach((item, i) => {
+
+    document.getElementById(item.id).innerHTML = star[i];
+
+    if (open_state) {
+
+      document.getElementById(item.id).classList.add('no-translate');
+
+    } else {
+
+      document.getElementById(item.id).classList.remove('no-translate');
+
+    }
+
+  })
+
+  titleHTML.forEach((item, i) => {
+
+    if (eelState) {
+
+      localeUpdate([item.id]);
+
+    } else {
+
+      document.getElementById(item.id).innerHTML = title[i];
+
+    }
+
+    if (open_state) {
+
+      document.getElementById(item.id).classList.add('no-translate');
+
+    } else {
+
+      document.getElementById(item.id).classList.remove('no-translate');
+
+    }
+
+  })
+
+  addressHTML.forEach((item, i) => {
+
+    if (eelState) {
+      
+      localeUpdate([item.id]);
+
+    } else {
+
+      document.getElementById(item.id).innerHTML = address[i];
+
+    }
+    
+    document.getElementById(item.id).href = mapLink[i];
+
+    if (open_state) {
+
+      document.getElementById(item.id).classList.add('no-translate');
+
+    } else {
+
+      document.getElementById(item.id).classList.remove('no-translate');
+
+    }
+
+  })
+
+}
+
+function randomStar(num = false) {
+
+  if (num) {
+
+    if (num % 10 == 0) {
+
+      return `${num}.0`;
+  
+    } else {
+  
+      return num;
+  
+    }
+    
+  } else {
+
+    result = Math.floor(Math.random() * 40)
+
+    if (result % 10 == 0) {
+
+      return `${result / 10 + 1}.0`;
+  
+    } else {
+  
+      return result / 10 + 1;
+  
+    }
+
+  }
+
+}
+
+/*
+  Reference source code & author:
+    https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript, by @csharptest.net on StackOverflow 
+
+*/
+/**
+ * Generate random strings.
+ * @param {Number} length - The length you want to generate
+ * @returns
+ */
+function randomString(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+
+  for ( var i = 0; i < length; i++ ) {
+
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+
+  }
+
+  return result;
 
 }
 

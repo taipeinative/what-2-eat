@@ -478,6 +478,28 @@ html {
 
 }
 
+/*
+ *  Grids. [.grid]
+ */
+ .grid {
+
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(3, auto minmax(5vh,auto) minmax(8vh,auto));
+    margin-top: 5vh;
+
+ }
+
+ .grid * {
+
+    display: flex;
+    margin: auto 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+ }
+
 /**
  * Icons. [.icon]
  */
@@ -694,6 +716,97 @@ html {
     margin-bottom: 3vh;
     margin-top: 10vh;
     text-align: center;
+
+}
+
+/*
+ *  Result's address's styles [.result-address]
+ */
+ .result-address {
+
+    font-size: 80%;
+    font-style: normal;
+    grid-column-start: 2;
+    grid-column-end: 11;
+    margin: 0;
+
+}
+
+/*
+ *  Result's category title [.result-category]
+ */
+.result-category {
+
+    font-size: 80%;
+    font-weight: 400;
+    grid-column-start: 2;
+    grid-column-end: 11;
+    padding-top: .5em;
+
+}
+
+.day .result-category {
+
+  color: var(--input-day);
+
+}
+
+.night .result-category {
+
+    color: var(--input-night);
+  
+  }
+
+/*
+ *  Result's category title [.result-category]
+ */
+.result-link.plain {
+
+    font-weight: 400;
+    padding: 0;
+
+}
+
+.day .result-link {
+
+    color: var(--scroll-day);
+
+}
+
+.night .result-link {
+
+    color: var(--scroll-night);
+
+}
+
+.result-link.plain::before {
+
+    content: "⧉";
+    padding-right: .3em;
+
+}
+
+/*
+ *  Result's review's styles [.result-star]
+ */
+ .result-star {
+
+    font-size: 120%;
+    font-weight: 600;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    justify-content: center;
+
+}
+
+/*
+ *  Result's title's styles [.result-title]
+ */
+ .result-title {
+
+    font-size: 120%;
+    grid-column-start: 2;
+    grid-column-end: 11;
 
 }
 

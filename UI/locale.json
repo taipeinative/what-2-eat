@@ -246,16 +246,94 @@
         "zh": "❮ 返回"
     },
     {
-        "id": "page-q3-stepbar-result",
+        "id": "page-q3-stepbar-complete",
         "attr": "title",
         "en": "Complete the query",
         "zh": "完成查詢"
     },
     {
-        "id": "page-q3-stepbar-result",
+        "id": "page-q3-stepbar-complete",
         "attr": "innerHTML",
         "en": "Complete ❯",
         "zh": "完成 ❯"
+    },
+    {
+        "id": "page-result-title",
+        "attr": "innerHTML",
+        "en": "Here's your restaurants!",
+        "zh": "為您介紹本日餐廳！"
+    },
+    {
+        "id": "page-result-info",
+        "attr": "innerHTML",
+        "en": "Click address for more information on Google Map.",
+        "zh": "點擊地址可開啟Google Map。"
+    },
+    {
+        "id": "result-rank-category",
+        "attr": "innerHTML",
+        "en": "Highest Rank",
+        "zh": "評價最高"
+    },
+    {
+        "id": "result-rank-title",
+        "attr": "innerHTML",
+        "en": "No matched restaurants.",
+        "zh": "沒有符合條件的餐廳。"
+    },
+    {
+        "id": "result-rank-address-link",
+        "attr": "innerHTML",
+        "en": "All recorded restaurants are not open now. Please come again later!",
+        "zh": "資料庫中的所有餐廳目前皆未營業。請稍後再試。"
+    },
+    {
+        "id": "result-walk-category",
+        "attr": "innerHTML",
+        "en": "Shortest Walk",
+        "zh": "距離最短"
+    },
+    {
+        "id": "result-walk-title",
+        "attr": "innerHTML",
+        "en": "No matched restaurants.",
+        "zh": "沒有符合條件的餐廳。"
+    },
+    {
+        "id": "result-walk-address-link",
+        "attr": "innerHTML",
+        "en": "All recorded restaurants are not open now. Please come again later!",
+        "zh": "資料庫中的所有餐廳目前皆未營業。請稍後再試。"
+    },
+    {
+        "id": "result-cheap-category",
+        "attr": "innerHTML",
+        "en": "Cheapest Price",
+        "zh": "價格最低"
+    },
+    {
+        "id": "result-cheap-title",
+        "attr": "innerHTML",
+        "en": "No matched restaurants.",
+        "zh": "沒有符合條件的餐廳。"
+    },
+    {
+        "id": "result-cheap-address-link",
+        "attr": "innerHTML",
+        "en": "All recorded restaurants are not open now. Please come again later!",
+        "zh": "資料庫中的所有餐廳目前皆未營業。請稍後再試。"
+    },
+    {
+        "id": "page-result-stepbar-back",
+        "attr": "title",
+        "en": "Go back to last step",
+        "zh": "上一步"
+    },
+    {
+        "id": "page-result-stepbar-back",
+        "attr": "innerHTML",
+        "en": "❮ Back",
+        "zh": "❮ 返回"
     },
     {
         "id": "page-footer-author",
