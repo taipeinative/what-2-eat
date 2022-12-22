@@ -13,6 +13,8 @@ class Sheet():
     
     Methods
     ----------
+    filter_time()
+        Filter dataframes by current time.
     query()
         Query objects by conditions.
     set_`<property>`()
@@ -30,7 +32,7 @@ class Sheet():
 
     ### Properties and set methods ###
 
-    # Following are all properties defined in Restaurants and methods to set them.
+    # Following are all properties defined in Sheet and methods to set them.
 
 
     @property
@@ -46,9 +48,118 @@ class Sheet():
 
     ### Methods ###
 
-    # Following are other methods can be called in Sheets.
+    # Following are other methods can be called in Sheet.
 
-    def query(self, kw: list , strict: bool = True , column: list = False):
+    def filter_price(self, max_price: int):
+        '''
+        Filter restaurants based on maximum affordable price.
+
+        Parameters
+        ---------
+        max_price : int
+            The maximum affordable price of the meal.
+
+        Returns
+        --------
+        result : pd.DataFrame
+            Filtered dataframe with affordable price.
+
+        Examples
+        --------
+
+        '''
+        result_df = pd.DataFrame(columns = self.df.columns.values)              # Initialize the dataframe
+
+        for i in range(len(self.df.index)):
+
+             if (max_price >= int(self.df.iat[i, 2].split('~')[0])):
+
+                result_df = pd.concat([result_df, self.df.iloc[[i]]])
+
+        result = result_df.dropna(how = 'all').sort_index()  # Drop the first row (the initial `result_df`)
+
+        return result
+
+
+    def filter_time(self):
+        '''
+        Filter restaurants based on current time.
+
+        Parameters
+        --------
+        None
+            No parameters required.
+
+        Returns
+        --------
+        result : pd.DataFrame
+            Filtered dataframe with avalible opening hours.
+
+        Examples
+        --------
+        Assuming current time is 04:20AM, Thursday, we have:
+        >>> df = rf.Sheet()
+        >>> df.set_df(pd.DataFrame({
+                'Type': ['Japanese','Taiwanese','Hongkongnese'],
+                'Name': ['CoCo Curry House', 'Yummy Food', 'Sei Dim Sum'],
+                'Price': ['80~150','75~140','60~250'],
+                'Place': ['Downtown','Middletown','Downtown'],
+                'Open_Remark': ['* w1','*','*'],
+                'Open_SUN': ['01:00-24:00','10:30-16:00','14:30-21:30']
+            }))
+        >>> df.filter_time()
+               Type              Name   Price     Place Open_Remark     Open_SUN
+        0  Japanese  CoCo Curry House  80~150  Downtown        * w1  01:00-24:00
+        '''
+        current_time = time.time()                                              # Get current time (Epoch format)
+        weekday = time.strftime( "%w", time.localtime(current_time) )           # Get current weekday (SUN for '0', SAT for '6')
+        time_str = time.strftime( "%H:%M", time.localtime(current_time) )       # Get current time (01:00AM for '01:00', 10:30PM for '22:30')
+
+        result_df = pd.DataFrame(columns = self.df.columns.values)              # Initialize the dataframe
+
+        common_df = pd.concat([self.query(['*'], False, ['Open_Remark']), self.query([f'\\* w\\d*{weekday}'],False)]).drop_duplicates(keep = False) # Get restaurants open almost everyday except for current day.
+        for i in range(len(common_df.index)):
+
+            hour_list = common_df.iat[i, 5].split('/')  # Retrieve all avalible opening hours from the column 'Open_SUN' (When '*' appears in 'Open_Remark', it means that there's no special opening hours for specific days)
+
+            for j in range(len(hour_list)):
+
+                if hour_list[j].split('-')[1] == '24:00':   # For cross-day specific
+
+                    if is_between(time_str, hour_list[j].split('-')[0], hour_list[j].split('-')[1], True):  # Check whether the restaurant is open.
+
+                        result_df = pd.concat([result_df, common_df.iloc[[i]]])  # If the restaurant opens, append it to the dataframe.
+
+                else:
+
+                    if is_between(time_str, hour_list[j].split('-')[0], hour_list[j].split('-')[1]):    # Normal
+
+                        result_df = pd.concat([result_df, common_df.iloc[[i]]]) # If the restaurant opens, append it to the dataframe.
+
+        specific_df = pd.concat([self.df, common_df]).drop_duplicates(keep = False) # Get restaurants which have odd opening hours, that is, without '*' remark.
+        for i in range(len(specific_df.index)):
+
+            hour_list = specific_df.iat[i, (5 + weekday)].split('/') # Retrieve all avalible opening hours from the column 'Open_XXX' (Where XXX is today's weekday)
+
+            for j in range(len(hour_list)):
+
+                if hour_list[j].split('-')[1] == '24:00':
+
+                    if is_between(time_str, hour_list[j].split('-')[0], hour_list[j].split('-')[1], True):
+
+                        result_df = pd.concat([result_df, specific_df.iloc[[i]]])
+
+                else:
+
+                    if is_between(time_str, hour_list[j].split('-')[0], hour_list[j].split('-')[1]):
+
+                        result_df = pd.concat([result_df, specific_df.iloc[[i]]])
+
+        result = result_df.dropna(how = 'all').sort_index()  # Drop the first row (the initial `result_df`)
+
+        return result
+
+    def query(self, kw: list , strict: bool = True , column: list = False , return_none: bool = False):
         '''
         Query data based on given conditions.
 
@@ -60,6 +171,8 @@ class Sheet():
             Toggle strict mode or not; default to be `True`.
         column : list or False
             The specific column to search; default to be `False`, which means search all sheet.
+        return_none : bool
+            Return None or an empty dataframe; default to be `False`, which means return empty dataframe.
 
         Returns
         --------
@@ -157,9 +270,11 @@ class Sheet():
 
             else:
 
+                #
+                #   Reference source code & author:
+                #       https://kanoki.org/2022/02/04/pandas-search-a-string-in-dataframe-across-all-columns/, by kanoki
+                #
                 return self.df[self.df.apply(lambda row: row.astype(str).str.contains(item, case = False).any(), axis=1)] # Return the search result dataframes, based on lenient searching
-
-
 
 
         def strict_query(item: str, column_names: list = False):
@@ -220,8 +335,6 @@ class Sheet():
                 return self.df[self.df.isin([item]).any(axis = 1)] # Return the search result dataframes, based on strict searching
 
 
-
-
         result = []
         temporary_df = pd.DataFrame(columns = self.df.columns.values) # Create an empty dataframe based on callee's columns
 
@@ -243,7 +356,14 @@ class Sheet():
 
         else: 
 
-            return None # Return `None` if the dataframe is empty
+            if return_none:
+
+                return None     # Return `None` if the dataframe is empty
+
+            else:
+
+                return result
+
 
     def unique(self, place: str):
         '''
@@ -271,6 +391,7 @@ class Sheet():
         '''
         return self.df[place].unique().tolist()
 
+
 def timestamp(msg):
     '''
     Prints a message with current local time.
@@ -293,3 +414,53 @@ def timestamp(msg):
     (The time differs based on current time; it use HH:MM:SS)
     '''
     print (f'{time.strftime( "[%H:%M:%S]", time.localtime(time.time()))} {msg}') # Prints message.
+
+
+def is_between(uncheck_time : str, start_time : str, end_time : str, cross_day : bool = False):
+    '''
+    Check whether the time is between two pre-given times.
+
+    Parameters
+    --------
+    uncheck_time : str
+        The time you want to check in 'xx:xx' format.
+
+    start_time : str
+        The beginning time in 'xx:xx' format.
+
+    end_time : str
+        The end time in 'xx:xx' format.
+
+    cross_day : bool
+        Whether the end time cross day; default to be false, and only support '24:00'. If an opening hour is '22:00-04:00', please write '00:00-04:00/22:00-24:00'.
+
+    Returns
+    --------
+    result : bool
+        The comparison result; returns true if uncheck_time is between start_time and end_time.
+
+    Examples
+    --------
+    >>> is_between('08:00','07:00','09:00')
+    True
+    >>> is_between('22:00','11:00','12:00')
+    False
+    '''
+    uncheck = time.strptime(f'1970-01-02 {uncheck_time}:00','%Y-%m-%d %H:%M:%S')    # Get the Epoch via time module 
+    start = time.strptime(f'1970-01-02 {start_time}:00','%Y-%m-%d %H:%M:%S')
+
+    if cross_day:
+
+        end = time.strptime('1970-01-03 00:00:00','%Y-%m-%d %H:%M:%S')     # Directly use Jan 3rd 1970 for cross day's end_time
+
+    else:
+
+        end = time.strptime(f'1970-01-02 {end_time}:00','%Y-%m-%d %H:%M:%S')
+
+    if (time.mktime(uncheck) - time.mktime(start) >= 0) & (time.mktime(end) - time.mktime(uncheck) > 0):  # If True, end > uncheck >= start
+
+        return True
+
+    else:
+
+        return False

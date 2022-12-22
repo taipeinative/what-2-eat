@@ -10,11 +10,11 @@ var dayTheme = true;
 /**
  * Polyfill the form related elements' (including \<select\>, sliders) behaviour using vanilla JavaScript, and include generateOptions() function to create dropdown options.
  */
-function clickForm() {
+async function clickForm() {
 
   // For .dropdown class
 
-  generateOptions(10);                                                            // Generate options for dropdowns
+  await generateOptions();                                                            // Generate options for dropdowns
 
   const dropList = document.querySelectorAll('.dropdown');                        // Find all <input> elements with .dropdown class, which are going to become <select>
   const dropOptionList = document.querySelectorAll('.list .list-option');         // Find all <li> elements with .list class, which are going to become <option>
@@ -153,6 +153,7 @@ function clickStep() {
   const backList = document.querySelectorAll('.back');                      // Find all elements with .back class
   const homeList = document.querySelectorAll('.home');                      // Find all elements with .home class
   const nextList = document.querySelectorAll('.next');                      // Find all elements with .next class
+  const resultList = document.querySelectorAll('.result');                  // Find all elements with .result class
 
   backList.forEach(button => {                                              // Add click event listners to items of backList
 
@@ -186,6 +187,25 @@ function clickStep() {
     });
 
   });
+
+  for (i = 0; i < resultList.length; i++) {                                 // DO NOT use async/await in Array.prototype.forEach()! (See comments in generateOptions() for more information)
+
+    var button = resultList[i];
+    button.addEventListener('click', async e => {
+
+      if (eelState == true) {
+
+        result = await eel.analyze('公館','日式',500)();
+        console.log(typeof(result));
+        console.log(result);
+
+      }
+      
+      e.preventDefault();
+
+    });
+
+  }
   
 }
 
@@ -253,7 +273,7 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
  * @param {Number} [quantity = 5] - The quantity of auto generated options; default to be 5.
  * @param {Boolean} [useDefault = true] - Whether default to show option or not; when set to false, there won't be default options.
  */
-function generateOptions(quantity = 5, useDefault = true) {
+async function generateOptions(quantity = 5, useDefault = true) {
 
   const insertList = document.querySelectorAll('.input:has(.dropdown)');
 
@@ -267,32 +287,72 @@ function generateOptions(quantity = 5, useDefault = true) {
 
   }
 
-  insertList.forEach(async (item,order) => {
 
+  /*
+
+    DO NOT use Array.prototype.forEach for following case!
+
+    Remember: NEVER use async/await in forEach, since it doesn't behaviour as what you might think!
+
+    Reference document:
+
+      https://zellwk.com/blog/async-await-in-loops/, by Zeel
+
+  */
+  for (n = 0; n < insertList.length; n++) {
+
+    var item = insertList[n];
+    var order = n;
     var initial;
     var dropdown = item.querySelectorAll(':scope .dropdown')[0];
     var autoMenu = document.createElement('ul');
     autoMenu.setAttribute('id',`page-q${order+1}-option-list`);
     autoMenu.setAttribute('class','list none');
         
-    // For places
+    // For pre-defined dropdowns
 
-    if (dropdown.classList.contains('place') && item.classList.contains('eel')) {
+    if (item.classList.contains('eel')) {
 
-      Places = await eel.getSheetData('Place')();
+      if (dropdown.classList.contains('place') || dropdown.classList.contains('type')) {
 
-      for (i = 0; i < Places.length; i++) {
+        if (dropdown.classList.contains('place')) {
 
-        var autoOption = document.createElement('li');
-        autoOption.setAttribute('id',`page-q${order+1}-option-${i+1}`);
-        autoOption.setAttribute('class','list-option');
-        autoOption.setAttribute('title',Places[i]);
-        autoOption.textContent = Places[i];
-        autoMenu.appendChild(autoOption);
-        (i == 0) ? (initial = Places[i]) : null;
-  
+          Column = await requestColumnData('Place');
+
+        } else if (dropdown.classList.contains('type')) {
+
+          Column = await requestColumnData('Type');
+
+        }
+
+        for (i = 0; i < Column.length; i++) {
+
+          var autoOption = document.createElement('li');
+          autoOption.setAttribute('id',`page-q${order+1}-option-${i+1}`);
+          autoOption.setAttribute('class','list-option');
+          autoOption.setAttribute('title',Column[i]);
+          autoOption.textContent = Column[i];
+          autoMenu.appendChild(autoOption);
+          (i == 0) ? (initial = Column[i]) : null;
+    
+        }
+
+      } else {
+
+        for (i = 0; i < quantity; i++) {
+
+          var autoOption = document.createElement('li');
+          autoOption.setAttribute('id',`page-q${order+1}-option-${i+1}`);
+          autoOption.setAttribute('class','list-option');
+          autoOption.setAttribute('title',`Option ${i+1}`);
+          autoOption.textContent = `Option ${i+1}`;
+          autoMenu.appendChild(autoOption);
+          initial = 'Option 1';
+    
+        }
+
       }
-
+    
     } else {
 
       for (i = 0; i < quantity; i++) {
@@ -314,7 +374,7 @@ function generateOptions(quantity = 5, useDefault = true) {
     (useDefault) ? dropdown.setAttribute('value',` ${initial}`) : null;
     dropdown.setAttribute('title', dropdown.value);
 
-  })
+  }
 
 }
 

@@ -33,8 +33,21 @@ var locale;
 async function requestLocale(testMode = false) {                        // Using `async` because we have to wait for eel to excute the command.
     
   var rawLocale = await eel.getLocaleFile()()                           // Using `await`, same reason as above.
-  testMode ? console.log(rawLocale) : console.log(null);                // Log locale in console while `testMode` is true.
+  testMode ? console.log(rawLocale) : null;                             // Log locale in console while `testMode` is true.
   locale= JSON.parse(rawLocale);                                        // Parse raw string back to JSON.
+
+}
+
+/**
+ * Request all unique data from the required column.
+ * @param {string} column - The required column.
+ * @param {boolean} [testMode = false] - Whether print locale content in console or not; default to be false.
+ */
+async function requestColumnData(column,testMode = false) {             // Using `async` because we have to wait for eel to excute the command.
+    
+  var data = await eel.getSheetData(column)();                          // Using `await`, same reason as above.
+  testMode ? console.log(data) : null;                                  // Log data in console while `testMode` is true.
+  return data;                                                          // Return data
 
 }
 

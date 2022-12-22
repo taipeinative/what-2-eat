@@ -94,4 +94,44 @@ def getSheetData(column: str):                  # The method helping JavaScript 
     values = rf.Sheet().unique(column)
     return values
 
+@eel.expose
+def analyze(place: str, type: str, price: int , time: bool = True):
+    '''
+    [For JavaScript] Analyze the result of the query.
+
+    Parameters
+    --------
+    place : str
+        Represent `Place` column in `Restaurants.xlsx`
+
+    type : str
+        Represent `Type` column in `Restaurants.xlsx`
+
+    price : int
+        Represent `Price` column in `Restaurants.xlsx`
+
+    time : bool
+        Whether apply current time to search, default to be `True`
+
+    Returns
+    --------
+    result : json
+        The result json file with everything frontend needs.
+
+    Examples
+    --------
+
+    '''
+    df = rf.Sheet()
+
+    if (time):
+
+        df.set_df(df.filter_time())
+    
+    df.set_df(df.filter_price(price))
+    df.set_df(df.query([place], column = ['Place']))
+    df.set_df(df.query([type], column = ['Type']))
+    result = df.df.filter(['Name','Address','Review','Google_Map']).to_json(orient = 'index',force_ascii = False)
+    return result
+
 if __name__ == '__main__': main()               # Run the file since __name__ default to be __main__ outside a class
