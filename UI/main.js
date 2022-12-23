@@ -5,6 +5,8 @@ var currentIndex = 0;
 var eelState = true;
 var dayTheme = true;
 var resultJSON;
+var open_state = true;
+var rawJSON;
 
 // Event Listeners
 
@@ -519,7 +521,6 @@ async function parseResult(json = false) {
   const starHTML = document.querySelectorAll('.result-star');
   const titleHTML = document.querySelectorAll('.result-title');
   const addressHTML = document.querySelectorAll('.result-link');
-  var open_state = true;
 
   if (json == false) {
 
@@ -533,6 +534,8 @@ async function parseResult(json = false) {
     }
 
   } else {
+
+    rawJSON = json;
 
     if (json != '[]') {
 
@@ -549,7 +552,7 @@ async function parseResult(json = false) {
 
     } else {
 
-      var open_state = false;
+      open_state = false;
       for (i = 0; i < 3; i ++) {
 
         star.push('X.X');
@@ -581,7 +584,7 @@ async function parseResult(json = false) {
 
   titleHTML.forEach((item, i) => {
 
-    if (eelState) {
+    if ((eelState == true) && (open_state == false)) {
 
       localeUpdate([item.id]);
 
@@ -605,7 +608,7 @@ async function parseResult(json = false) {
 
   addressHTML.forEach((item, i) => {
 
-    if (eelState) {
+    if ((eelState == true) && (open_state == false)) {
       
       localeUpdate([item.id]);
 
