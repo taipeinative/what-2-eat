@@ -200,7 +200,7 @@ function clickStep() {
 
         if (eelState == true) {
 
-          result = await eel.analyze('A','A',1000,random = true)();
+          result = await eel.analyze('Random','Random', 99999, true, true)();
           await parseResult(result);
 
         } else {
