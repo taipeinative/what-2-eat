@@ -223,13 +223,13 @@ function clickStep() {
           var q1 = document.getElementById('page-q1-input').value.substring(1);
           var q2 = document.getElementById('page-q2-input').value.substring(1);
 
-          if (typeof(document.getElementById('page-q3-preview').innerHTML) == 'string') {
+          if (isNaN(parseInt(document.getElementById('page-q3-preview').innerHTML))) {
 
             var q3 = 1000;
 
           } else {
 
-            var q3 = document.getElementById('page-q3-preview').innerHTML;
+            var q3 = parseInt(document.getElementById('page-q3-preview').innerHTML);
 
           }
 
@@ -537,9 +537,10 @@ async function parseResult(json = false) {
 
     rawJSON = json;
 
-    if (json != '[]') {
+    if (rawJSON != '[]') {
 
       resultJSON = JSON.parse(json);
+      open_state = true
 
       for (i = 0; i < 3; i ++) {
 
